@@ -633,6 +633,11 @@ html.light-mode .rpt-health-score{background:rgba(255,255,255,.88);}
 .hedit-del-btn.is-undo{background:rgba(72,187,120,.15);border-color:rgba(72,187,120,.3);color:#48bb78;}
 .hedit-oth-del{background:rgba(252,129,129,.1);border:1px solid rgba(252,129,129,.22);color:#fc8181;border-radius:7px;width:30px;height:32px;cursor:pointer;font-size:.85rem;transition:all .15s;align-self:flex-end;}
 .hedit-oth-del.is-undo{background:rgba(72,187,120,.1);border-color:rgba(72,187,120,.3);color:#48bb78;}
+.hedit-wh-btn{background:rgba(212,168,71,.08);border:1px solid rgba(212,168,71,.22);border-radius:7px;color:var(--gold-light);font-size:.75rem;padding:5px 11px;cursor:pointer;transition:background .15s,border-color .15s;font-weight:500;}
+.hedit-wh-btn:hover,.hedit-wh-btn.active{background:rgba(212,168,71,.22);border-color:var(--gold);color:var(--gold);}
+.hedit-calc-btn{width:100%;padding:9px;background:rgba(200,160,64,.1);border:1.5px solid rgba(200,160,64,.28);border-radius:9px;color:var(--gold);font-size:.82rem;font-weight:700;cursor:pointer;margin-bottom:6px;transition:background .15s;}
+.hedit-calc-btn:hover{background:rgba(200,160,64,.2);}
+.hedit-calc-result{display:none;align-items:center;gap:8px;font-size:.8rem;padding:8px 10px;background:rgba(72,187,120,.1);border:1px solid rgba(72,187,120,.25);border-radius:7px;color:#68D391;margin-bottom:4px;flex-wrap:wrap;}
 .hedit-footer{padding:14px 22px 18px;border-top:1px solid var(--glass-border);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;}
 .hedit-cancel{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--silver);border-radius:10px;padding:9px 20px;font-size:.82rem;cursor:pointer;}
 .hedit-cancel:hover{color:var(--chrome);}
@@ -2087,6 +2092,8 @@ function _heditCoOpts(size, selCo) {
   return { opts: all.map(c=>`<option value="${c}"${c===sel?' selected':''}>${c}</option>`).join(''), isCustom: !inList && !!selCo && selCo !== 'Custom Company', customVal: (!inList && selCo && selCo!=='Custom Company') ? selCo : '' };
 }
 
+const _heditFloorSizes = new Set(['16x16','12x12','24x24','12x24m','rustic8x12','rustic10x16','rustic12x20','rustic12x24','12x24s']);
+
 function onHEditSizeChange(idx) {
   const sizeEl = document.getElementById(`hep-${idx}-size`);
   const coEl   = document.getElementById(`hep-${idx}-co`);
@@ -2098,6 +2105,13 @@ function onHEditSizeChange(idx) {
   coEl.innerHTML = all.map(c=>`<option value="${c}">${c}</option>`).join('');
   if(all.includes(prev)) coEl.value = prev;
   onHEditCoChange(idx);
+  const isFloor = _heditFloorSizes.has(size);
+  const whWrap = document.getElementById(`hep-${idx}-wh-wrap`);
+  if(whWrap) whWrap.style.display = isFloor ? 'none' : 'block';
+  const resEl = document.getElementById(`hep-${idx}-res-json`);
+  if(resEl) resEl.value = '';
+  const resDiv = document.getElementById(`hep-${idx}-result`);
+  if(resDiv) { resDiv.innerHTML = ''; resDiv.style.display = 'none'; }
 }
 
 function onHEditCoChange(idx) {
@@ -2109,7 +2123,23 @@ function onHEditCoChange(idx) {
 function _heditBuildProdHTML(p, i) {
   const purSel = v => _purposeOpts.map(o=>`<option value="${o}"${o===v?' selected':''}>${o||'— Purpose —'}</option>`).join('');
   const sizeOpts = s => _tileEditSizes.map(([v,l])=>`<option value="${v}"${v===s?' selected':''}>${l}</option>`).join('');
-  const {opts:coOpts, isCustom, customVal} = _heditCoOpts(p.size||'8x12', p.company||'');
+  const size = p.size || '8x12';
+  const {opts:coOpts, isCustom, customVal} = _heditCoOpts(size, p.company||'');
+  const isFloor = _heditFloorSizes.has(size);
+  const wh = p.wh || 0;
+  const stdWh = [7, 9, 10];
+  const whIsCustom = wh > 0 && !stdWh.includes(wh);
+  const whBtns = stdWh.map(v=>`<button class="hedit-wh-btn${wh===v?' active':''}" onclick="heditWhPreset(${i},this)" data-val="${v}">${v} ft</button>`).join('')
+    + `<button class="hedit-wh-btn${whIsCustom?' active':''}" onclick="heditWhPreset(${i},this)" data-val="custom">Custom</button>`;
+  const res = p.res || {};
+  const hasRes = (res.total||0) > 0;
+  let resText = '';
+  if(hasRes){
+    if(size==='12x24s') resText = `Step: ${res.step||0} | Riser: ${res.riser||0} | Total: ${res.total} Pcs`;
+    else if(isFloor) resText = `Total: ${res.total} Pcs`;
+    else resText = `Deco: ${res.deco||0} | Deep: ${res.deep||0} | Light: ${res.light||0} | Total: ${res.total} Pcs`;
+  }
+  const resJson = hasRes ? JSON.stringify(res).replace(/"/g,'&quot;') : '';
   return `<div class="hedit-prod" id="hep-wrap-${i}">
     <div class="hedit-prod-ttl" style="display:flex;justify-content:space-between;align-items:center">
       <span>🧱 Product ${i+1}</span>
@@ -2117,7 +2147,7 @@ function _heditBuildProdHTML(p, i) {
     </div>
     <div class="hedit-row">
       <div class="hedit-field"><label>Tile Size</label>
-        <select id="hep-${i}-size" onchange="onHEditSizeChange(${i})">${sizeOpts(p.size||'8x12')}</select>
+        <select id="hep-${i}-size" onchange="onHEditSizeChange(${i})">${sizeOpts(size)}</select>
       </div>
       <div class="hedit-field"><label>Sqft</label>
         <input type="number" id="hep-${i}-sqft" value="${p.sqft||0}" min="0" step="0.5">
@@ -2131,13 +2161,24 @@ function _heditBuildProdHTML(p, i) {
         <select id="hep-${i}-pur">${purSel(p.purpose||'')}</select>
       </div>
     </div>
+    <div id="hep-${i}-wh-wrap" style="display:${isFloor?'none':'block'};margin-bottom:8px">
+      <label style="font-size:.78rem;font-weight:600;color:var(--silver);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px">Wall Height</label>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center" id="hep-${i}-whbtn-wrap">
+        ${whBtns}
+        <input type="number" id="hep-${i}-wh-custom" value="${whIsCustom?wh:''}" min="1" step="0.5" placeholder="ft" style="width:75px;display:${whIsCustom?'block':'none'}">
+      </div>
+      <div id="hep-${i}-wh-err" style="display:none;color:#fc8181;font-size:.74rem;margin-top:3px">⚠ Wall height দিন</div>
+    </div>
     <div class="hedit-field" style="margin-bottom:8px"><label>Company</label>
       <select id="hep-${i}-co" onchange="onHEditCoChange(${i})">${coOpts}</select>
     </div>
-    <div class="hedit-field" id="hep-${i}-customwrap" style="display:${isCustom?'flex':'none'};flex-direction:column;gap:4px;margin-bottom:6px">
+    <div class="hedit-field" id="hep-${i}-customwrap" style="display:${isCustom?'flex':'none'};flex-direction:column;gap:4px;margin-bottom:8px">
       <label>Custom Company Name</label>
       <input type="text" id="hep-${i}-customco" value="${customVal}" placeholder="e.g. ABC Ceramics">
     </div>
+    <input type="hidden" id="hep-${i}-res-json" value="${resJson}">
+    <button class="hedit-calc-btn" onclick="heditCalcProduct(${i})">🔁 Calculate Pieces</button>
+    <div class="hedit-calc-result" id="hep-${i}-result" style="display:${hasRes?'flex':'none'}">✅ ${resText}</div>
   </div>`;
 }
 
@@ -2160,6 +2201,48 @@ function heditToggleProd(i) {
   const removed = card.classList.toggle('hedit-removed');
   btn.textContent = removed ? '↩ Undo' : '✕ Remove';
   btn.classList.toggle('is-undo', removed);
+}
+
+function heditWhPreset(i, btn) {
+  const wrap = document.getElementById(`hep-${i}-whbtn-wrap`);
+  if(!wrap) return;
+  wrap.querySelectorAll('.hedit-wh-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const ci = document.getElementById(`hep-${i}-wh-custom`);
+  if(ci) ci.style.display = btn.dataset.val === 'custom' ? 'block' : 'none';
+  const errEl = document.getElementById(`hep-${i}-wh-err`);
+  if(errEl) errEl.style.display = 'none';
+}
+
+function heditCalcProduct(i) {
+  const size = document.getElementById(`hep-${i}-size`)?.value || '8x12';
+  const sqft = parseFloat(document.getElementById(`hep-${i}-sqft`)?.value) || 0;
+  const isFloor = _heditFloorSizes.has(size);
+  const whErr = document.getElementById(`hep-${i}-wh-err`);
+  if(whErr) whErr.style.display = 'none';
+
+  let wh = 0;
+  if(!isFloor) {
+    const activeBtn = document.querySelector(`#hep-${i}-whbtn-wrap .hedit-wh-btn.active`);
+    if(!activeBtn) { if(whErr) whErr.style.display = 'block'; return; }
+    wh = activeBtn.dataset.val === 'custom'
+      ? (parseFloat(document.getElementById(`hep-${i}-wh-custom`)?.value) || 0)
+      : parseFloat(activeBtn.dataset.val);
+    if(!wh) { if(whErr) whErr.style.display = 'block'; return; }
+  }
+  if(!sqft || sqft <= 0) { alert('Sqft value দিন'); return; }
+
+  const res = computeTiles(sqft, size, wh);
+  const resEl = document.getElementById(`hep-${i}-res-json`);
+  if(resEl) resEl.value = JSON.stringify(res);
+
+  let txt = '';
+  if(size === '12x24s') txt = `Step: ${res.step} Pcs | Riser: ${res.riser} Pcs | Total: ${res.total} Pcs`;
+  else if(isFloor) txt = `Total: ${res.total} Pcs (${res.verified.toFixed(2)} sqft)`;
+  else txt = `Deco: ${res.deco} | Deep: ${res.deep} | Light: ${res.light} | Total: ${res.total} Pcs`;
+
+  const resultDiv = document.getElementById(`hep-${i}-result`);
+  if(resultDiv) { resultDiv.innerHTML = '✅ ' + txt; resultDiv.style.display = 'flex'; }
 }
 
 function heditToggleOth(i) {
@@ -2254,10 +2337,22 @@ function saveHistEdit() {
       ? ((document.getElementById(`hep-${i}-customco`)?.value||'').trim() || 'Custom Company')
       : coSel;
     const origP = (orig.computed||[])[origPIdx];
-    const res = (origP && origP.size === size) ? origP.res : { total: 0, step: 0, riser: 0 };
+    const resJsonEl = document.getElementById(`hep-${i}-res-json`);
+    let res;
+    if(resJsonEl && resJsonEl.value) {
+      try { res = JSON.parse(resJsonEl.value); } catch(e) { res = null; }
+    }
+    if(!res) res = (origP && origP.size === size) ? origP.res : {total:0,step:0,riser:0,deco:0,deep:0,light:0,verified:0};
+    const isFloor = _heditFloorSizes.has(size);
+    let wh = 0;
+    if(!isFloor) {
+      const activeWhBtn = document.querySelector(`#hep-${i}-whbtn-wrap .hedit-wh-btn.active`);
+      if(activeWhBtn) wh = activeWhBtn.dataset.val === 'custom' ? (parseFloat(document.getElementById(`hep-${i}-wh-custom`)?.value)||0) : parseFloat(activeWhBtn.dataset.val);
+      else if(origP) wh = origP.wh || 0;
+    }
     newGrandArea  += sq;
     newGrandTotal += res.total || 0;
-    newComputed.push({...(origP||{}), size, sqft: sq, rate, purpose, company, res});
+    newComputed.push({...(origP||{}), size, sqft:sq, rate, purpose, company, wh, isFloor, res});
     origPIdx++;
   });
   h.computed   = newComputed;
