@@ -2062,7 +2062,42 @@ function printFromHistory(id) {
 
 // ── History Edit ──
 const _purposeOpts = ['','Bathroom','Kitchen','Drawing Room','Dining Room','Bedroom','Exterior Wall','Stair Room Wall','Balcony Wall','Roof Wall','ধাপ (Step)','রাইজার (Riser)'];
+const _tileEditSizes = [
+  ['8x12','8×12 (Wall)'],['10x16','10×16 (Wall)'],['12x18','12×18 (Wall)'],
+  ['12x20','12×20 (Wall)'],['12x24','12×24 (Wall)'],['12x24m','12×24 Matching (Floor)'],
+  ['12x24s','12×24 Stair (সিঁড়ি)'],['rustic8x12','Rustic 8×12 (Exterior)'],
+  ['rustic10x16','Rustic 10×16 (Exterior)'],['rustic12x20','Rustic 12×20 (Exterior)'],
+  ['rustic12x24','Rustic 12×24 (Exterior)'],['16x16','16×16 (Floor)'],
+  ['12x12','12×12 (Floor)'],['24x24','24×24 (Floor)']
+];
 let _editingHistId = null;
+
+function _heditCoOpts(size, selCo) {
+  const list = companyMap[size] || [];
+  const all = list.includes('Custom Company') ? list : [...list, 'Custom Company'];
+  const inList = all.some(c => c !== 'Custom Company' && c === selCo);
+  const sel = inList ? selCo : (selCo && selCo !== 'Custom Company' ? 'Custom Company' : (all[0]||''));
+  return { opts: all.map(c=>`<option value="${c}"${c===sel?' selected':''}>${c}</option>`).join(''), isCustom: !inList && !!selCo && selCo !== 'Custom Company', customVal: (!inList && selCo && selCo!=='Custom Company') ? selCo : '' };
+}
+
+function onHEditSizeChange(idx) {
+  const sizeEl = document.getElementById(`hep-${idx}-size`);
+  const coEl   = document.getElementById(`hep-${idx}-co`);
+  if(!sizeEl || !coEl) return;
+  const size = sizeEl.value;
+  const prev = coEl.value;
+  const list = companyMap[size] || [];
+  const all  = list.includes('Custom Company') ? list : [...list, 'Custom Company'];
+  coEl.innerHTML = all.map(c=>`<option value="${c}">${c}</option>`).join('');
+  if(all.includes(prev)) coEl.value = prev;
+  onHEditCoChange(idx);
+}
+
+function onHEditCoChange(idx) {
+  const co   = document.getElementById(`hep-${idx}-co`)?.value;
+  const wrap = document.getElementById(`hep-${idx}-customwrap`);
+  if(wrap) wrap.style.display = co === 'Custom Company' ? 'flex' : 'none';
+}
 
 function openHistEdit(id) {
   const all = loadHistory();
@@ -2071,31 +2106,56 @@ function openHistEdit(id) {
   _editingHistId = String(id);
 
   document.getElementById('he-customer').value = h.customer||'';
-  document.getElementById('he-phone').value = h.phone||'';
-  document.getElementById('he-address').value = h.address||'';
-  document.getElementById('he-soldby').value = h.soldBy||'';
-  document.getElementById('he-paid').value = h.paidAmount||'';
-  document.getElementById('he-remark').value = h.remark||'';
+  document.getElementById('he-phone').value    = h.phone||'';
+  document.getElementById('he-address').value  = h.address||'';
+  document.getElementById('he-soldby').value   = h.soldBy||'';
+  document.getElementById('he-paid').value     = h.paidAmount||'';
+  document.getElementById('he-remark').value   = h.remark||'';
 
-  const purSel = v => _purposeOpts.map(o => `<option value="${o}"${o===v?' selected':''}>${o||'— Purpose —'}</option>`).join('');
+  const purSel = v => _purposeOpts.map(o=>`<option value="${o}"${o===v?' selected':''}>${o||'— Purpose —'}</option>`).join('');
+  const sizeOpts = s => _tileEditSizes.map(([v,l])=>`<option value="${v}"${v===s?' selected':''}>${l}</option>`).join('');
 
   document.getElementById('he-products').innerHTML = (h.computed||[]).length
-    ? (h.computed||[]).map((p,i) => `
-      <div class="hedit-prod">
-        <div class="hedit-prod-ttl">🧱 ${tileSizeNames[p.size]||p.size}</div>
-        <div class="hedit-prod-grid">
-          <div class="hedit-field"><label>Sqft</label><input type="number" id="hep-${i}-sqft" value="${p.sqft||0}" min="0" step="0.5"></div>
-          <div class="hedit-field"><label>Rate ৳/sqft</label><input type="number" id="hep-${i}-rate" value="${p.rate||0}" min="0" step="1"></div>
-          <div class="hedit-field"><label>Company</label><input type="text" id="hep-${i}-co" value="${p.company||''}"></div>
-          <div class="hedit-field"><label>Purpose</label><select id="hep-${i}-pur">${purSel(p.purpose||'')}</select></div>
-        </div>
-      </div>`).join('')
+    ? (h.computed||[]).map((p,i) => {
+        const {opts:coOpts, isCustom, customVal} = _heditCoOpts(p.size, p.company||'');
+        return `<div class="hedit-prod">
+          <div class="hedit-prod-ttl">🧱 Product ${i+1}</div>
+          <div class="hedit-row">
+            <div class="hedit-field">
+              <label>Tile Size</label>
+              <select id="hep-${i}-size" onchange="onHEditSizeChange(${i})">${sizeOpts(p.size)}</select>
+            </div>
+            <div class="hedit-field">
+              <label>Sqft</label>
+              <input type="number" id="hep-${i}-sqft" value="${p.sqft||0}" min="0" step="0.5">
+            </div>
+          </div>
+          <div class="hedit-row">
+            <div class="hedit-field">
+              <label>Rate ৳/sqft</label>
+              <input type="number" id="hep-${i}-rate" value="${p.rate||0}" min="0" step="1">
+            </div>
+            <div class="hedit-field">
+              <label>Purpose</label>
+              <select id="hep-${i}-pur">${purSel(p.purpose||'')}</select>
+            </div>
+          </div>
+          <div class="hedit-field" style="margin-bottom:8px">
+            <label>Company</label>
+            <select id="hep-${i}-co" onchange="onHEditCoChange(${i})">${coOpts}</select>
+          </div>
+          <div class="hedit-field" id="hep-${i}-customwrap" style="display:${isCustom?'flex':'none'};flex-direction:column;gap:4px;margin-bottom:6px">
+            <label>Custom Company Name</label>
+            <input type="text" id="hep-${i}-customco" value="${customVal}" placeholder="e.g. ABC Ceramics">
+          </div>
+        </div>`;
+      }).join('')
     : '<div style="color:var(--silver);font-size:.82rem;padding:6px 0">No tile products in this entry.</div>';
 
   document.getElementById('he-others').innerHTML = (h.otherItems||[]).length
     ? (h.otherItems||[]).map((it,i) => `
       <div class="hedit-oth-row">
-        <div class="hedit-field"><label>Item</label><input type="text" id="heo-${i}-name" value="${it.name||''}"></div>
+        <div class="hedit-field"><label>Item Name</label><input type="text" id="heo-${i}-name" value="${it.name||''}"></div>
         <div class="hedit-field"><label>Qty</label><input type="number" id="heo-${i}-qty" value="${it.qty||0}" min="0" step="1"></div>
         <div class="hedit-field"><label>Rate ৳</label><input type="number" id="heo-${i}-rate" value="${it.rate||0}" min="0" step="1"></div>
       </div>`).join('')
@@ -2115,26 +2175,30 @@ function saveHistEdit() {
   const idx = all.findIndex(x => String(x.id) === _editingHistId);
   if(idx === -1) { closeHistEdit(); return; }
 
-  const h = {...all[idx]};
-  h.customer = document.getElementById('he-customer').value.trim();
-  h.phone    = document.getElementById('he-phone').value.trim();
-  h.address  = document.getElementById('he-address').value.trim();
-  h.soldBy   = document.getElementById('he-soldby').value.trim();
+  const h = {...all[idx], computed: all[idx].computed ? all[idx].computed.map(p=>({...p})) : [], otherItems: all[idx].otherItems ? all[idx].otherItems.map(it=>({...it})) : [] };
+  h.customer   = document.getElementById('he-customer').value.trim();
+  h.phone      = document.getElementById('he-phone').value.trim();
+  h.address    = document.getElementById('he-address').value.trim();
+  h.soldBy     = document.getElementById('he-soldby').value.trim();
   h.paidAmount = parseFloat(document.getElementById('he-paid').value)||0;
-  h.remark   = document.getElementById('he-remark').value.trim();
+  h.remark     = document.getElementById('he-remark').value.trim();
 
   let newGrandArea = 0;
-  (h.computed||[]).forEach((p, i) => {
+  h.computed.forEach((p, i) => {
+    p.size = document.getElementById(`hep-${i}-size`)?.value || p.size;
     const sq = parseFloat(document.getElementById(`hep-${i}-sqft`)?.value)||p.sqft||0;
-    p.sqft    = sq;
-    p.rate    = parseFloat(document.getElementById(`hep-${i}-rate`)?.value)||0;
-    p.company = (document.getElementById(`hep-${i}-co`)?.value||'').trim()||p.company||'';
+    p.sqft   = sq;
+    p.rate   = parseFloat(document.getElementById(`hep-${i}-rate`)?.value)||0;
     p.purpose = document.getElementById(`hep-${i}-pur`)?.value||'';
+    const coSel = document.getElementById(`hep-${i}-co`)?.value||'';
+    p.company = coSel === 'Custom Company'
+      ? ((document.getElementById(`hep-${i}-customco`)?.value||'').trim() || 'Custom Company')
+      : coSel;
     newGrandArea += sq;
   });
   h.grandArea = parseFloat(newGrandArea.toFixed(2));
 
-  (h.otherItems||[]).forEach((it, i) => {
+  h.otherItems.forEach((it, i) => {
     it.name = (document.getElementById(`heo-${i}-name`)?.value||'').trim()||it.name||'';
     it.qty  = parseFloat(document.getElementById(`heo-${i}-qty`)?.value)||0;
     it.rate = parseFloat(document.getElementById(`heo-${i}-rate`)?.value)||0;
