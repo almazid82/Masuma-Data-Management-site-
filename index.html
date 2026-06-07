@@ -891,6 +891,10 @@ html.light-mode .an-table td{color:var(--chrome);}
           <div id="anTopCustomers"></div>
         </div>
       </div>
+      <div class="an-table-wrap" style="margin-top:20px">
+        <div class="an-sec-title">🏢 Company-wise Sales</div>
+        <div id="anCompanySales"></div>
+      </div>
       <div class="an-table-wrap">
         <div class="an-sec-title">📋 All Transactions</div>
         <div id="anTransTable" style="overflow-x:auto"></div>
@@ -2034,6 +2038,39 @@ function buildAnalytics() {
       <td>${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td>
     </tr>`).join('')}
     </tbody></table>` : '<div class="an-empty">—</div>';
+
+  // ── Company-wise Sales ──
+  const compMap = {};
+  arr.forEach(h => {
+    (h.computed||[]).forEach(p => {
+      const co = (p.company||'Unknown').trim();
+      // normalize "DBL Ceramics (Regular)" / "(Matching)" → "DBL Ceramics"
+      const coKey = co.replace(/\s*\(.*?\)\s*$/,'').trim() || 'Unknown';
+      if(!compMap[coKey]) compMap[coKey] = {sqft:0, revenue:0, orders:new Set(), pieces:0};
+      compMap[coKey].sqft += p.sqft||0;
+      compMap[coKey].revenue += p.rate>0 ? p.sqft*p.rate : 0;
+      compMap[coKey].orders.add(h.receiptNo||h.savedAtTs);
+      compMap[coKey].pieces += p.res ? (p.res.total||0) : 0;
+    });
+  });
+  const compEntries = Object.entries(compMap)
+    .map(([name,d]) => [name, {...d, orderCount: d.orders.size}])
+    .sort((a,b) => b[1].revenue - a[1].revenue || b[1].sqft - a[1].sqft);
+  const maxCompRev = compEntries.length ? compEntries[0][1].revenue : 1;
+  const companyColors = ['#C8A040','#4299e1','#48bb78','#ed8936','#9f7aea','#f687b3','#38b2ac','#fc8181','#68d391','#fbd38d'];
+  document.getElementById('anCompanySales').innerHTML = compEntries.length ? `
+    <table class="an-table"><thead><tr><th>#</th><th>Company</th><th>Sqft Sold</th><th>Total Pieces</th><th>Orders</th><th>Revenue</th></tr></thead><tbody>
+    ${compEntries.map(([name,d],i) => `<tr>
+      <td><span class="an-rank" style="background:${companyColors[i%companyColors.length]}22;color:${companyColors[i%companyColors.length]};border:1px solid ${companyColors[i%companyColors.length]}44">${i+1}</span></td>
+      <td><span style="font-weight:600;color:${companyColors[i%companyColors.length]}">${name}</span>
+        <div class="an-bar-wrap"><div class="an-bar" style="width:${Math.round((d.revenue||1)/(maxCompRev||1)*100)}%;background:${companyColors[i%companyColors.length]}"></div></div>
+      </td>
+      <td>${d.sqft.toFixed(0)} sqft</td>
+      <td>${d.pieces.toLocaleString('en-IN')} pcs</td>
+      <td>${d.orderCount}</td>
+      <td style="color:var(--gold-light);font-weight:600">${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td>
+    </tr>`).join('')}
+    </tbody></table>` : '<div class="an-empty">কোনো company data নেই</div>';
 
   // ── All Transactions Table ──
   const sorted = [...arr].sort((a,b) => b.savedAtTs - a.savedAtTs);
