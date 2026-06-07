@@ -497,6 +497,36 @@ input.invalid,select.invalid{border-color:#FF6060;}
 
 footer{text-align:center;padding:24px 0 16px;font-size:.74rem;color:var(--silver);opacity:.4;letter-spacing:.04em;}
 footer span{color:var(--gold);opacity:1;}
+/* ═══ ANALYTICS ═══ */
+.analytics-wrap{max-width:960px;margin:0 auto;}
+.analytics-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.analytics-title{font-family:var(--font-head);font-size:1.6rem;font-weight:700;background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.analytics-export-btn{background:linear-gradient(135deg,#27AE60,#1A7A40);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:opacity .2s;letter-spacing:.02em;}
+.analytics-export-btn:hover{opacity:.85;}
+.an-period-wrap{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+.an-period-btn{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--silver);border-radius:8px;padding:6px 14px;font-size:.78rem;cursor:pointer;transition:all .2s;}
+.an-period-btn.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600;}
+.an-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px;}
+.an-card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:18px 14px;text-align:center;box-shadow:var(--glass-glow);}
+.an-card-icon{font-size:1.5rem;margin-bottom:6px;}
+.an-card-val{font-family:var(--font-head);font-size:1.45rem;font-weight:700;color:var(--gold-light);}
+.an-card-label{font-size:.7rem;color:var(--silver);margin-top:4px;text-transform:uppercase;letter-spacing:.08em;}
+.an-sec-title{font-family:var(--font-head);font-size:.95rem;font-weight:600;color:var(--chrome);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--glass-border);}
+.an-chart-wrap{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:var(--glass-glow);}
+.an-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:640px){.an-grid{grid-template-columns:1fr;}}
+.an-table-wrap{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:16px;box-shadow:var(--glass-glow);overflow:hidden;}
+.an-table{width:100%;border-collapse:collapse;font-size:.8rem;}
+.an-table th{text-align:left;padding:7px 10px;color:var(--gold);font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--glass-border);}
+.an-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--chrome);}
+.an-table tr:last-child td{border-bottom:none;}
+.an-rank{color:var(--gold-light);font-weight:700;font-family:var(--font-mono);}
+.an-bar-wrap{background:rgba(255,255,255,.06);border-radius:3px;height:5px;margin-top:3px;}
+.an-bar{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));}
+.an-empty{text-align:center;padding:40px;color:var(--silver);font-size:.88rem;}
+html.light-mode .an-card{background:rgba(255,255,255,.9);}
+html.light-mode .an-chart-wrap,html.light-mode .an-table-wrap{background:rgba(255,255,255,.88);}
+html.light-mode .an-table td{color:var(--chrome);}
 </style>
 </head>
 <body>
@@ -545,6 +575,10 @@ footer span{color:var(--gold);opacity:1;}
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       History
       <span class="nav-badge" id="navHistBadge">0</span>
+    </div>
+    <div class="nav-link" id="nav-analytics" onclick="navigate('analytics')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Analytics
     </div>
     <div class="nav-link" id="nav-about" onclick="navigate('about')">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -748,10 +782,16 @@ footer span{color:var(--gold);opacity:1;}
           <span class="other-sel-hint">Check items → set qty → Add to PDF</span>
         </div>
         <div class="other-checklist" id="otherChecklist"></div>
-        <button class="other-pdf-btn" onclick="addOtherToPDF()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-          Add Checked Items to PDF Receipt
-        </button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="other-pdf-btn" onclick="addOtherToPDF()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            Add Checked Items to PDF Receipt
+          </button>
+          <button class="other-pdf-btn" onclick="printSelectedOtherPDF()" style="background:linear-gradient(135deg,#2b6cb0,#1a4a8a)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Print Selected as PDF
+          </button>
+        </div>
         <div class="other-status" id="otherStatus"></div>
       </div>
     </div>
@@ -817,6 +857,44 @@ footer span{color:var(--gold);opacity:1;}
       <div class="hist-results-info" id="histResultsInfo"></div>
       <div id="histList"></div>
       <div class="hist-pagination" id="histPagination"></div>
+    </div>
+  </section>
+
+  <!-- ══ ANALYTICS PAGE ══ -->
+  <section class="page-section" id="page-analytics">
+    <div class="analytics-wrap">
+      <div class="analytics-header">
+        <div class="analytics-title">📊 Analytics Dashboard</div>
+        <button class="analytics-export-btn" onclick="exportCSV()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export Excel (CSV)
+        </button>
+      </div>
+      <div class="an-period-wrap">
+        <button class="an-period-btn active" onclick="setAnalyticsPeriod('all',this)">All Time</button>
+        <button class="an-period-btn" onclick="setAnalyticsPeriod('year',this)">This Year</button>
+        <button class="an-period-btn" onclick="setAnalyticsPeriod('month',this)">This Month</button>
+        <button class="an-period-btn" onclick="setAnalyticsPeriod('week',this)">This Week</button>
+      </div>
+      <div class="an-cards" id="anCards"></div>
+      <div class="an-chart-wrap">
+        <div class="an-sec-title">Monthly Revenue (৳)</div>
+        <canvas id="anChart" height="200"></canvas>
+      </div>
+      <div class="an-grid">
+        <div class="an-table-wrap">
+          <div class="an-sec-title">🏆 Top Products</div>
+          <div id="anTopProducts"></div>
+        </div>
+        <div class="an-table-wrap">
+          <div class="an-sec-title">👤 Top Customers</div>
+          <div id="anTopCustomers"></div>
+        </div>
+      </div>
+      <div class="an-table-wrap">
+        <div class="an-sec-title">📋 All Transactions</div>
+        <div id="anTransTable" style="overflow-x:auto"></div>
+      </div>
     </div>
   </section>
 
@@ -996,6 +1074,7 @@ function navigate(page) {
   window.scrollTo({top:0, behavior:'smooth'});
   if(page === 'home') refreshHomeStats();
   if(page === 'history') { currentPage = 1; applyFilters(); }
+  if(page === 'analytics') buildAnalytics();
 }
 
 function toggleMobileNav() {
@@ -1036,7 +1115,7 @@ function addProductRow() {
       <div class="field" id="coField-${id}" style="display:none"><label>Company</label><select id="co-${id}" onchange="onCompanyChange(${id})"><option value="">— Select company —</option></select><span class="err-msg" id="coErr-${id}">Select company.</span></div>
       <div class="field" id="customCoNameField-${id}" style="display:none"><label>Company Name</label><input type="text" id="customCoName-${id}" placeholder="e.g. ABC Ceramics"></div>
       <div class="field" id="customCoPpbField-${id}" style="display:none"><label>Pieces Per Carton</label><input type="number" id="customCoPpb-${id}" placeholder="e.g. 18" min="1" step="1"><span class="err-msg" id="customCoPpbErr-${id}">Enter pieces per carton.</span></div>
-      <div class="field"><label>Purpose <span style="font-weight:400;opacity:.6">(Optional)</span></label><select id="purpose-${id}"><option value="">— Select purpose —</option><option value="Bathroom">Bathroom</option><option value="Drawing Room">Drawing Room</option><option value="Dining Room">Dining Room</option><option value="Bedroom">Bedroom</option><option value="Exterior Wall">Exterior Wall</option><option value="Stair Room Wall">Stair Room Wall</option><option value="Balcony Wall">Balcony Wall</option><option value="Roof Wall">Roof Wall</option><option value="ধাপ (Step)">ধাপ (Step)</option><option value="রাইজার (Riser)">রাইজার (Riser)</option></select></div>
+      <div class="field"><label>Purpose <span style="font-weight:400;opacity:.6">(Optional)</span></label><select id="purpose-${id}"><option value="">— Select purpose —</option><option value="Bathroom">Bathroom</option><option value="Kitchen">Kitchen</option><option value="Drawing Room">Drawing Room</option><option value="Dining Room">Dining Room</option><option value="Bedroom">Bedroom</option><option value="Exterior Wall">Exterior Wall</option><option value="Stair Room Wall">Stair Room Wall</option><option value="Balcony Wall">Balcony Wall</option><option value="Roof Wall">Roof Wall</option><option value="ধাপ (Step)">ধাপ (Step)</option><option value="রাইজার (Riser)">রাইজার (Riser)</option></select></div>
       <div class="field"><label>Rate / Piece <span style="font-weight:400;opacity:.6">(Optional)</span></label><input type="number" id="rate-${id}" placeholder="e.g. 63" min="0" step="0.01"></div>
       <div class="field wide" id="whField-${id}"><label>Wall Height</label><div class="height-row"><button class="preset-btn" data-row="${id}" data-val="7">7 ft</button><button class="preset-btn" data-row="${id}" data-val="9">9 ft</button><button class="preset-btn" data-row="${id}" data-val="custom">Custom</button><input type="number" class="custom-h" id="customH-${id}" placeholder="ft" min="1" step="0.5"></div><span class="err-msg" id="heightErr-${id}">Set wall height.</span></div>
     </div>`;
@@ -1269,10 +1348,10 @@ function renderResults(data) {
     } else if(!p.isFloor){
       breakdown = `<div class="prb-grid"><div class="prb-stat"><div class="prb-stat-label deco">Deco</div><div class="prb-stat-val">${p.res.deco}</div><div class="prb-stat-unit">pcs</div></div><div class="prb-stat"><div class="prb-stat-label deep">Deep</div><div class="prb-stat-val">${p.res.deep}</div><div class="prb-stat-unit">pcs</div></div><div class="prb-stat"><div class="prb-stat-label light">Light</div><div class="prb-stat-val">${p.res.light}</div><div class="prb-stat-unit">pcs</div></div></div>`;
     }
-    const rateHtml = p.rate > 0 ? `<div class="prb-rate-row">৳ ${p.rate}/piece × ${p.res.total} pcs = <strong>৳ ${(p.rate * p.res.total).toLocaleString('en-IN')}</strong></div>` : '';
+    const rateHtml = p.rate > 0 ? `<div class="prb-rate-row">৳ ${p.rate}/sqft × ${p.sqft} sqft = <strong>৳ ${(p.rate * p.sqft).toLocaleString('en-IN')}</strong></div>` : '';
     html += `<div class="product-result-block"><div class="prb-title"><span class="prb-num-badge">${i+1}</span>${sn} — ${p.sqft} sq ft${p.company?' — '+p.company:''}</div>${breakdown}<div class="prb-grid" style="grid-template-columns:1fr 1fr;margin-top:${p.isFloor?'0':'10px'}"><div class="prb-stat"><div class="prb-stat-label total">Total Pieces</div><div class="prb-stat-val">${p.res.total}</div><div class="prb-stat-unit">pcs</div></div><div class="prb-stat"><div class="prb-stat-label total">Verified Area</div><div class="prb-stat-val" style="font-size:1.2rem">${p.res.verified.toFixed(1)}</div><div class="prb-stat-unit">sq ft</div></div></div>${boxInfo}${rateHtml}<div class="prb-verified">✓ ${p.res.total} pieces cover ${p.res.verified.toFixed(2)} sq ft${Math.abs(p.res.verified-p.sqft)<1?' — within tolerance':''}</div></div>`;
   });
-  const _tileAmt = data.computed.reduce((s,p)=>s+(p.rate>0?p.res.total*p.rate:0),0);
+  const _tileAmt = data.computed.reduce((s,p)=>s+(p.rate>0?p.sqft*p.rate:0),0);
   const _otherAmt = (window._otherItemsForPDF||[]).reduce((s,it)=>s+(it.rate>0?it.qty*it.rate:0),0);
   const _grandAmt = _tileAmt + _otherAmt;
   const _finalHtml = _grandAmt > 0 ? `<div class="gt-final">৳ ${_grandAmt.toLocaleString('en-IN')} <span style="font-size:.78rem;opacity:.75">Total Amount</span></div>` : '';
@@ -1318,8 +1397,8 @@ function printReceipt() {
       const riserCarton = stepCarton;
       const stepName = szName + (p.company ? ` — ${p.company}` : '') + `<br><span style="font-size:6.5pt;color:#555;font-weight:700">▶ Step (ধাপ)</span>` + (p.purpose?`<br><span style="font-size:6.5pt;color:#555;font-style:italic">Purpose: ${p.purpose}</span>`:'');
       const riserName = szName + (p.company ? ` — ${p.company}` : '') + `<br><span style="font-size:6.5pt;color:#2b6cb0;font-weight:700">▶ Riser (রাইজার)</span>`;
-      const stepSub = p.rate > 0 ? p.res.step * p.rate : 0;
-      const riserSub = p.rate > 0 ? p.res.riser * p.rate : 0;
+      const stepSub = p.rate > 0 ? (p.sqft / 2) * p.rate : 0;
+      const riserSub = p.rate > 0 ? (p.sqft / 2) * p.rate : 0;
       if(stepSub) totalAmount += stepSub;
       if(riserSub) totalAmount += riserSub;
       totalPcs += p.res.step + p.res.riser;
@@ -1327,7 +1406,7 @@ function printReceipt() {
       rowNo++;
       invRows += `<tr><td style="text-align:center">${rowNo}</td><td style="text-align:center">Sale</td><td style="text-align:center">${riserCarton}</td><td style="text-align:center">${category}</td><td class="inv-name-td">${riserName}</td><td style="text-align:center">${p.sqft.toFixed(2)}</td><td style="text-align:right">${p.rate>0?'&#2547;'+p.rate.toLocaleString('en-IN'):'—'}</td><td style="text-align:right;font-weight:600">${riserSub>0?'&#2547;'+riserSub.toLocaleString('en-IN'):'—'}</td></tr>`;
     } else {
-    const sub = p.rate > 0 ? p.res.total * p.rate : 0;
+    const sub = p.rate > 0 ? p.sqft * p.rate : 0;
     if(sub) totalAmount += sub;
     totalPcs += p.res.total;
     const priceStr = p.rate > 0 ? p.rate.toLocaleString('en-IN') : '—';
@@ -1389,7 +1468,7 @@ function buildOtherChecklist() {
     const div = document.createElement('div');
     div.className = 'other-check-item';
     div.id = `oci-${idx}`;
-    div.innerHTML = `<div class="oci-checkbox" id="ochk-${idx}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="oci-label">${name}</span><div class="oci-qty-wrap" id="oqw-${idx}"><span class="oci-qty-label">Qty</span><input class="oci-qty-input" type="number" id="oqty-${idx}" value="1" min="1" step="1" onclick="event.stopPropagation()"></div><div class="oci-qty-wrap"><span class="oci-qty-label">৳/unit <span style="opacity:.5;font-size:.6rem">(opt)</span></span><input class="oci-qty-input" type="number" id="oprice-${idx}" placeholder="0" min="0" step="1" onclick="event.stopPropagation()"></div><div class="oci-qty-wrap" style="gap:4px"><button class="oci-pdf-btn" onclick="event.stopPropagation();printOtherItemPDF(${idx},'${name.replace(/'/g,"\\'")}')" title="এই item এর আলাদা PDF"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></button></div>`;
+    div.innerHTML = `<div class="oci-checkbox" id="ochk-${idx}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="oci-label">${name}</span><div class="oci-qty-wrap" id="oqw-${idx}"><span class="oci-qty-label">Qty</span><input class="oci-qty-input" type="number" id="oqty-${idx}" value="1" min="1" step="1" onclick="event.stopPropagation()"></div><div class="oci-qty-wrap"><span class="oci-qty-label">৳/unit <span style="opacity:.5;font-size:.6rem">(opt)</span></span><input class="oci-qty-input" type="number" id="oprice-${idx}" placeholder="0" min="0" step="1" onclick="event.stopPropagation()"></div>`;
     div.addEventListener('click', () => toggleOtherItem(idx));
     wrap.appendChild(div);
   });
@@ -1410,6 +1489,34 @@ function getCheckedOtherItems() {
     return { name, qty: parseInt(document.getElementById(`oqty-${idx}`).value)||1, rate: parseFloat(document.getElementById(`oprice-${idx}`).value)||0 };
   }).filter(Boolean);
 }
+function printSelectedOtherPDF() {
+  const items = getCheckedOtherItems();
+  const status = document.getElementById('otherStatus');
+  if(!items.length){ status.className='other-status err'; status.textContent='⚠ কোনো product select করা হয়নি।'; return; }
+  const cust = document.getElementById('customerName')?.value.trim() || 'N/A';
+  const phone = document.getElementById('customerPhone')?.value.trim() || '';
+  const addr = document.getElementById('customerAddress')?.value.trim() || '';
+  const now = new Date();
+  const date = now.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  const rNo = 'MT-OTH-' + now.getFullYear().toString().slice(-2) + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + String(now.getSeconds()).padStart(2,'0');
+  let rowsHtml = '', totalAmt = 0;
+  items.forEach((it, i) => {
+    const sub = it.rate > 0 ? it.qty * it.rate : 0;
+    totalAmt += sub;
+    const priceStr = it.rate > 0 ? '&#2547;'+it.rate.toLocaleString('en-IN') : '—';
+    const subStr = sub > 0 ? '&#2547;'+sub.toLocaleString('en-IN') : '—';
+    rowsHtml += `<tr><td style="text-align:center">${i+1}</td><td style="text-align:center">Sale</td><td style="text-align:center">${it.qty} Pcs</td><td style="text-align:center">ACCESSORY</td><td class="inv-name-td">${it.name}</td><td style="text-align:center">${it.qty}</td><td style="text-align:right">${priceStr}</td><td style="text-align:right;font-weight:600">${subStr}</td></tr>`;
+  });
+  rowsHtml += `<tr class="inv-grand-row"><td colspan="6" style="text-align:right;padding-right:6px">Total Items: ${items.length} &nbsp;</td><td style="text-align:center;font-weight:700">Total:</td><td style="text-align:right;font-weight:800">${totalAmt>0?'&#2547;'+totalAmt.toLocaleString('en-IN'):'—'}</td></tr>`;
+  const paidAmt = parseFloat(document.getElementById('paidAmount')?.value)||0;
+  const due = totalAmt - paidAmt;
+  const totalsHtml = totalAmt > 0 ? `<div class="rcpt-totals-wrap"><div class="rcpt-totals-grid"><div class="trow t-payable"><span><strong>PAYABLE</strong></span><span><strong>&#2547; ${totalAmt.toLocaleString('en-IN')}</strong></span></div><div class="trow"><span>Paid</span><span>&#2547; ${paidAmt.toLocaleString('en-IN')}</span></div><div class="trow t-balance"><span>Balance</span><span>&#2547; ${due.toLocaleString('en-IN')}/-</span></div></div></div><div class="rcpt-inwords"><strong>In Word:</strong> ${numToWords(totalAmt)} Taka Only</div>` : '';
+  const prev = document.getElementById('print-receipt').innerHTML;
+  document.getElementById('print-receipt').innerHTML = `<div class="rcpt"><div class="rcpt-dev-tag">Software developed by Al Mazid &amp; Fojla Rabby</div><div class="rcpt-shop-header"><div class="rcpt-shop-name">Masuma Tiles Agency</div><div class="rcpt-shop-tagline">Retailer of RAK Ceramics, DBL Ceramics, BCL Ceramics, Tushar Ceramics &amp; Bright Ceramics</div><div class="rcpt-shop-address">College Road, Amishapara, Sonaimuri, Noakhali</div><div class="rcpt-shop-mobile">Mobile: 01839-843685</div></div><div class="rcpt-title-line"><span>BILL — INVOICE (Other Products)</span></div><div class="rcpt-meta-top"><div class="rcpt-meta-left"><div class="rcpt-cust-row"><span class="rcl">Name</span><span class="rcs">:</span><span class="rcv">&nbsp;${cust}</span></div><div class="rcpt-cust-row"><span class="rcl">Address</span><span class="rcs">:</span><span class="rcv">&nbsp;${addr||'—'}</span></div><div class="rcpt-cust-row"><span class="rcl">Mobile</span><span class="rcs">:</span><span class="rcv">&nbsp;${phone||'—'}</span></div></div><div class="rcpt-meta-right"><div class="rcpt-cust-row" style="justify-content:flex-end"><span class="rcl" style="text-align:right">Invoice #</span><span class="rcs">&nbsp;:&nbsp;</span><span class="rcv">${rNo}</span></div><div class="rcpt-cust-row" style="justify-content:flex-end"><span class="rcl" style="text-align:right">Date</span><span class="rcs">&nbsp;:&nbsp;</span><span class="rcv">${date}</span></div></div></div><table class="rcpt-inv-table"><thead><tr><th style="width:4%">SN.</th><th style="width:7%">TYPE</th><th style="width:10%">CARTON/PIECE</th><th style="width:11%">CATEGORY</th><th style="width:32%">PRODUCT NAME</th><th style="width:9%">QTY</th><th style="width:12%">PRICE</th><th style="width:11%">SUB TOTAL</th></tr></thead><tbody>${rowsHtml}</tbody></table>${totalsHtml}<div class="rcpt-sig-row"><div class="rcpt-sig-box"><div class="rcpt-sig-line"></div><div class="rcpt-sig-label">Customer Signature</div></div><div class="rcpt-sig-box"><div class="rcpt-sig-line"></div><div class="rcpt-sig-label">Authorized Signature</div></div></div><div class="rcpt-footer-note">বিঃদ্রঃ পানিতে ভেজানো মাল ফেরত গ্রহণযোগ্য নয়, বিক্রিত মালামাল ৩০ দিনের পরে ফেরত নেওয়া হয় না।</div></div>`;
+  window.print();
+  setTimeout(()=>{ document.getElementById('print-receipt').innerHTML = prev; }, 1500);
+}
+
 function printOtherItemPDF(idx, name) {
   const qty = parseInt(document.getElementById(`oqty-${idx}`)?.value)||1;
   const rate = parseFloat(document.getElementById(`oprice-${idx}`)?.value)||0;
@@ -1810,6 +1917,254 @@ function clearAllHistory() {
   updateBulkBar();
   refreshHomeStats();
   applyFilters();
+}
+
+// ════════════════════════════════════════
+// ANALYTICS
+// ════════════════════════════════════════
+let _anPeriod = 'all';
+
+function setAnalyticsPeriod(period, btn) {
+  _anPeriod = period;
+  document.querySelectorAll('.an-period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildAnalytics();
+}
+
+function calcOrderRevenue(h) {
+  const t = (h.computed||[]).reduce((s,p) => s + (p.rate>0 ? p.sqft*p.rate : 0), 0);
+  const o = (h.otherItems||[]).reduce((s,it) => s + (it.rate>0 ? it.qty*it.rate : 0), 0);
+  return t + o;
+}
+
+function filterByPeriod(arr) {
+  const now = new Date();
+  if(_anPeriod === 'week') {
+    const weekAgo = now.getTime() - 7*24*60*60*1000;
+    return arr.filter(h => h.savedAtTs >= weekAgo);
+  }
+  if(_anPeriod === 'month') {
+    return arr.filter(h => {
+      const d = new Date(h.savedAtTs);
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    });
+  }
+  if(_anPeriod === 'year') {
+    return arr.filter(h => new Date(h.savedAtTs).getFullYear() === now.getFullYear());
+  }
+  return arr;
+}
+
+function buildAnalytics() {
+  const all = loadHistory();
+  const arr = filterByPeriod(all);
+
+  if(arr.length === 0) {
+    document.getElementById('anCards').innerHTML = '<div class="an-empty">কোনো data নেই। কিছু order save করুন।</div>';
+    document.getElementById('anTopProducts').innerHTML = '<div class="an-empty">—</div>';
+    document.getElementById('anTopCustomers').innerHTML = '<div class="an-empty">—</div>';
+    document.getElementById('anTransTable').innerHTML = '<div class="an-empty">—</div>';
+    const cv = document.getElementById('anChart');
+    const ctx = cv.getContext('2d');
+    ctx.clearRect(0,0,cv.width,cv.height);
+    return;
+  }
+
+  // ── Summary cards ──
+  const totalRevenue = arr.reduce((s,h) => s + calcOrderRevenue(h), 0);
+  const totalOrders = arr.length;
+  const totalSqft = arr.reduce((s,h) => s + (h.grandArea||0), 0);
+  const uniqueCustomers = new Set(arr.map(h => (h.customer||'').toLowerCase().trim()).filter(Boolean)).size;
+  const avgOrder = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+
+  document.getElementById('anCards').innerHTML = `
+    <div class="an-card"><div class="an-card-icon">💰</div><div class="an-card-val">৳${totalRevenue>0?totalRevenue.toLocaleString('en-IN'):'—'}</div><div class="an-card-label">Total Revenue</div></div>
+    <div class="an-card"><div class="an-card-icon">📦</div><div class="an-card-val">${totalOrders}</div><div class="an-card-label">Total Orders</div></div>
+    <div class="an-card"><div class="an-card-icon">👥</div><div class="an-card-val">${uniqueCustomers}</div><div class="an-card-label">Unique Customers</div></div>
+    <div class="an-card"><div class="an-card-icon">📐</div><div class="an-card-val">${totalSqft.toFixed(0)}</div><div class="an-card-label">Total Sqft Sold</div></div>
+    <div class="an-card"><div class="an-card-icon">📊</div><div class="an-card-val">৳${avgOrder>0?Math.round(avgOrder).toLocaleString('en-IN'):'—'}</div><div class="an-card-label">Avg Order Value</div></div>
+  `;
+
+  // ── Monthly Revenue Chart ──
+  buildChart(all);
+
+  // ── Top Products ──
+  const prodMap = {};
+  arr.forEach(h => {
+    (h.computed||[]).forEach(p => {
+      const key = tileSizeNames[p.size] || p.size;
+      if(!prodMap[key]) prodMap[key] = {sqft:0, revenue:0, orders:0};
+      prodMap[key].sqft += p.sqft||0;
+      prodMap[key].revenue += p.rate>0 ? p.sqft*p.rate : 0;
+      prodMap[key].orders++;
+    });
+  });
+  const topProds = Object.entries(prodMap).sort((a,b) => b[1].sqft - a[1].sqft).slice(0,8);
+  const maxProdSqft = topProds.length ? topProds[0][1].sqft : 1;
+  document.getElementById('anTopProducts').innerHTML = topProds.length ? `
+    <table class="an-table"><thead><tr><th>#</th><th>Product</th><th>Sqft</th><th>Revenue</th></tr></thead><tbody>
+    ${topProds.map(([name,d],i) => `<tr>
+      <td><span class="an-rank">${i+1}</span></td>
+      <td>${name}<div class="an-bar-wrap"><div class="an-bar" style="width:${Math.round(d.sqft/maxProdSqft*100)}%"></div></div></td>
+      <td>${d.sqft.toFixed(0)}</td>
+      <td>${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td>
+    </tr>`).join('')}
+    </tbody></table>` : '<div class="an-empty">—</div>';
+
+  // ── Top Customers ──
+  const custMap = {};
+  arr.forEach(h => {
+    const name = (h.customer||'Unknown').trim();
+    if(!custMap[name]) custMap[name] = {orders:0, revenue:0, sqft:0, phone:h.phone||''};
+    custMap[name].orders++;
+    custMap[name].revenue += calcOrderRevenue(h);
+    custMap[name].sqft += h.grandArea||0;
+  });
+  const topCusts = Object.entries(custMap).sort((a,b) => b[1].revenue - a[1].revenue).slice(0,8);
+  const maxCustRev = topCusts.length ? topCusts[0][1].revenue : 1;
+  document.getElementById('anTopCustomers').innerHTML = topCusts.length ? `
+    <table class="an-table"><thead><tr><th>#</th><th>Customer</th><th>Orders</th><th>Revenue</th></tr></thead><tbody>
+    ${topCusts.map(([name,d],i) => `<tr>
+      <td><span class="an-rank">${i+1}</span></td>
+      <td>${name}${d.phone?`<br><span style="font-size:.68rem;color:var(--silver)">${d.phone}</span>`:''}<div class="an-bar-wrap"><div class="an-bar" style="width:${Math.round((d.revenue||1)/(maxCustRev||1)*100)}%"></div></div></td>
+      <td>${d.orders}</td>
+      <td>${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td>
+    </tr>`).join('')}
+    </tbody></table>` : '<div class="an-empty">—</div>';
+
+  // ── All Transactions Table ──
+  const sorted = [...arr].sort((a,b) => b.savedAtTs - a.savedAtTs);
+  document.getElementById('anTransTable').innerHTML = `
+    <table class="an-table" style="min-width:560px"><thead>
+      <tr><th>#</th><th>Date</th><th>Invoice</th><th>Customer</th><th>Sqft</th><th>Revenue</th><th>Paid</th><th>Due</th></tr>
+    </thead><tbody>
+    ${sorted.map((h,i) => {
+      const rev = calcOrderRevenue(h);
+      const paid = h.paidAmount||0;
+      const due = rev > 0 ? rev - paid : 0;
+      return `<tr>
+        <td style="color:var(--silver)">${i+1}</td>
+        <td style="white-space:nowrap">${h.savedAt||h.date||'—'}</td>
+        <td style="font-family:var(--font-mono);font-size:.72rem">${h.receiptNo||'—'}</td>
+        <td>${h.customer||'—'}${h.phone?`<br><span style="font-size:.68rem;color:var(--silver)">${h.phone}</span>`:''}</td>
+        <td>${(h.grandArea||0).toFixed(0)}</td>
+        <td style="color:var(--gold-light);font-weight:600">${rev>0?'৳'+Math.round(rev).toLocaleString('en-IN'):'—'}</td>
+        <td>${paid>0?'৳'+paid.toLocaleString('en-IN'):'—'}</td>
+        <td style="color:${due>0?'#e53e3e':'#48bb78'}">${rev>0?(due>0?'৳'+Math.round(due).toLocaleString('en-IN'):'✓ Clear'):'—'}</td>
+      </tr>`;
+    }).join('')}
+    </tbody></table>`;
+}
+
+function buildChart(allHistory) {
+  const cv = document.getElementById('anChart');
+  if(!cv) return;
+  const w = cv.offsetWidth || 700;
+  cv.width = w;
+  cv.height = 200;
+  const ctx = cv.getContext('2d');
+  ctx.clearRect(0,0,w,200);
+
+  // Build last 12 months data
+  const now = new Date();
+  const months = [];
+  for(let i=11; i>=0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+    months.push({ year:d.getFullYear(), month:d.getMonth(), label:d.toLocaleDateString('en-GB',{month:'short',year:'2-digit'}), revenue:0 });
+  }
+  allHistory.forEach(h => {
+    const d = new Date(h.savedAtTs);
+    const m = months.find(x => x.year===d.getFullYear() && x.month===d.getMonth());
+    if(m) m.revenue += calcOrderRevenue(h);
+  });
+
+  const maxRev = Math.max(...months.map(m=>m.revenue), 1);
+  const pad = {top:20, right:16, bottom:36, left:54};
+  const cw = w - pad.left - pad.right;
+  const ch = 200 - pad.top - pad.bottom;
+  const barW = Math.max(4, Math.floor(cw/months.length) - 6);
+  const isLight = document.documentElement.classList.contains('light-mode');
+  const gridCol = isLight ? 'rgba(0,0,0,.08)' : 'rgba(255,255,255,.07)';
+  const textCol = isLight ? '#4A5570' : '#8A9ABE';
+
+  // Grid lines
+  ctx.strokeStyle = gridCol;
+  ctx.lineWidth = 1;
+  for(let r=0;r<=4;r++){
+    const y = pad.top + ch - (r/4)*ch;
+    ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(pad.left+cw,y); ctx.stroke();
+    const val = Math.round(maxRev*r/4);
+    ctx.fillStyle = textCol;
+    ctx.font = '9px Inter,sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(val>=1000?Math.round(val/1000)+'k':val, pad.left-4, y+3);
+  }
+
+  // Bars
+  months.forEach((m,i) => {
+    const x = pad.left + i*(cw/months.length) + (cw/months.length - barW)/2;
+    const barH = m.revenue>0 ? Math.max(3, (m.revenue/maxRev)*ch) : 0;
+    const y = pad.top + ch - barH;
+    const grad = ctx.createLinearGradient(0, y, 0, pad.top+ch);
+    grad.addColorStop(0, '#EEC85A');
+    grad.addColorStop(1, '#9A7828');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.roundRect(x, y, barW, barH, [3,3,0,0]);
+    ctx.fill();
+    // Label
+    ctx.fillStyle = textCol;
+    ctx.font = '8px Inter,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(m.label, x+barW/2, pad.top+ch+14);
+    // Value on top
+    if(m.revenue > 0) {
+      ctx.fillStyle = '#EEC85A';
+      ctx.font = 'bold 8px Inter,sans-serif';
+      ctx.fillText(m.revenue>=1000?Math.round(m.revenue/1000)+'k':Math.round(m.revenue), x+barW/2, y-4);
+    }
+  });
+}
+
+// ── CSV Export ──
+function exportCSV() {
+  const arr = loadHistory();
+  if(!arr.length) { alert('কোনো history নেই export করার জন্য।'); return; }
+  const rows = [
+    ['Invoice No','Date','Customer Name','Phone','Address','Sold By','Tile Products','Total Sqft','Total Pieces','Revenue (৳)','Paid (৳)','Due (৳)','Remark']
+  ];
+  arr.forEach(h => {
+    const rev = calcOrderRevenue(h);
+    const paid = h.paidAmount||0;
+    const due = rev > 0 ? rev - paid : 0;
+    const prods = (h.computed||[]).map(p => `${tileSizeNames[p.size]||p.size}(${p.sqft}sqft${p.company?'/'+p.company:''})`).join(' | ');
+    rows.push([
+      h.receiptNo||'',
+      h.savedAt||h.date||'',
+      h.customer||'',
+      h.phone||'',
+      h.address||'',
+      h.soldBy||'',
+      prods,
+      (h.grandArea||0).toFixed(0),
+      h.grandTotal||0,
+      rev>0?Math.round(rev):'',
+      paid>0?paid:'',
+      rev>0?Math.round(due):'',
+      h.remark||''
+    ]);
+  });
+  const bom = '﻿';
+  const csv = bom + rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Masuma_Tiles_History_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // ════════════════════════════════════════
