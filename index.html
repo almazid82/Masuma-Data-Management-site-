@@ -625,7 +625,14 @@ html.light-mode .rpt-health-score{background:rgba(255,255,255,.88);}
 .hedit-prod-ttl{font-size:.78rem;font-weight:700;color:var(--gold-light);margin-bottom:10px;}
 .hedit-prod-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;}
 @media(max-width:520px){.hedit-row{grid-template-columns:1fr;}.hedit-prod-grid{grid-template-columns:1fr 1fr;}}
-.hedit-oth-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px;}
+.hedit-oth-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:flex-end;}
+.hedit-removed{opacity:.35;transition:opacity .2s;}
+.hedit-removed .hedit-prod-ttl span,.hedit-removed .hedit-oth-lbl{text-decoration:line-through;color:var(--silver);}
+.hedit-removed .hedit-field input,.hedit-removed .hedit-field select{pointer-events:none;}
+.hedit-del-btn{background:rgba(252,129,129,.12);border:1px solid rgba(252,129,129,.25);color:#fc8181;border-radius:7px;padding:3px 10px;font-size:.7rem;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.hedit-del-btn.is-undo{background:rgba(72,187,120,.15);border-color:rgba(72,187,120,.3);color:#48bb78;}
+.hedit-oth-del{background:rgba(252,129,129,.1);border:1px solid rgba(252,129,129,.22);color:#fc8181;border-radius:7px;width:30px;height:32px;cursor:pointer;font-size:.85rem;transition:all .15s;align-self:flex-end;}
+.hedit-oth-del.is-undo{background:rgba(72,187,120,.1);border-color:rgba(72,187,120,.3);color:#48bb78;}
 .hedit-footer{padding:14px 22px 18px;border-top:1px solid var(--glass-border);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;}
 .hedit-cancel{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--silver);border-radius:10px;padding:9px 20px;font-size:.82rem;cursor:pointer;}
 .hedit-cancel:hover{color:var(--chrome);}
@@ -2099,14 +2106,14 @@ function onHEditCoChange(idx) {
   if(wrap) wrap.style.display = co === 'Custom Company' ? 'flex' : 'none';
 }
 
-function _heditBuildProdHTML(p, i, removable) {
+function _heditBuildProdHTML(p, i) {
   const purSel = v => _purposeOpts.map(o=>`<option value="${o}"${o===v?' selected':''}>${o||'— Purpose —'}</option>`).join('');
   const sizeOpts = s => _tileEditSizes.map(([v,l])=>`<option value="${v}"${v===s?' selected':''}>${l}</option>`).join('');
   const {opts:coOpts, isCustom, customVal} = _heditCoOpts(p.size||'8x12', p.company||'');
   return `<div class="hedit-prod" id="hep-wrap-${i}">
     <div class="hedit-prod-ttl" style="display:flex;justify-content:space-between;align-items:center">
       <span>🧱 Product ${i+1}</span>
-      ${removable ? `<button onclick="heditRemoveProduct(${i})" style="background:rgba(252,129,129,.12);border:1px solid rgba(252,129,129,.25);color:#fc8181;border-radius:7px;padding:3px 10px;font-size:.7rem;cursor:pointer">✕ Remove</button>` : ''}
+      <button class="hedit-del-btn" id="hep-delbtn-${i}" onclick="heditToggleProd(${i})">✕ Remove</button>
     </div>
     <div class="hedit-row">
       <div class="hedit-field"><label>Tile Size</label>
@@ -2134,29 +2141,52 @@ function _heditBuildProdHTML(p, i, removable) {
   </div>`;
 }
 
+function _heditBuildOthHTML(it, i) {
+  return `<div class="hedit-oth-row" id="heo-wrap-${i}">
+    <div class="hedit-field"><label class="hedit-oth-lbl">Item Name</label><input type="text" id="heo-${i}-name" value="${(it.name||'').replace(/"/g,'&quot;')}"></div>
+    <div class="hedit-field"><label class="hedit-oth-lbl">Qty</label><input type="number" id="heo-${i}-qty" value="${it.qty||0}" min="0" step="1"></div>
+    <div class="hedit-field"><label class="hedit-oth-lbl">Rate ৳</label><input type="number" id="heo-${i}-rate" value="${it.rate||0}" min="0" step="1"></div>
+    <button class="hedit-oth-del" id="heo-delbtn-${i}" onclick="heditToggleOth(${i})" title="Remove">✕</button>
+  </div>`;
+}
+
 let _heditProdCount = 0;
+let _heditOthCount  = 0;
+
+function heditToggleProd(i) {
+  const card = document.getElementById(`hep-wrap-${i}`);
+  const btn  = document.getElementById(`hep-delbtn-${i}`);
+  if(!card || !btn) return;
+  const removed = card.classList.toggle('hedit-removed');
+  btn.textContent = removed ? '↩ Undo' : '✕ Remove';
+  btn.classList.toggle('is-undo', removed);
+}
+
+function heditToggleOth(i) {
+  const row = document.getElementById(`heo-wrap-${i}`);
+  const btn = document.getElementById(`heo-delbtn-${i}`);
+  if(!row || !btn) return;
+  const removed = row.classList.toggle('hedit-removed');
+  btn.textContent = removed ? '↩' : '✕';
+  btn.classList.toggle('is-undo', removed);
+}
 
 function heditAddProduct() {
-  _heditProdCount++;
-  const i = _heditProdCount - 1;
   const wrap = document.getElementById('he-products');
-  // If it was empty placeholder, clear it
-  if(wrap.querySelector('div[style]')?.textContent?.includes('No tile')) wrap.innerHTML = '';
+  if(wrap.children[0]?.textContent?.includes('No tile')) wrap.innerHTML = '';
+  const i = _heditProdCount++;
   const div = document.createElement('div');
-  div.innerHTML = _heditBuildProdHTML({size:'8x12', sqft:0, rate:0, company:'', purpose:''}, i, true);
+  div.innerHTML = _heditBuildProdHTML({size:'8x12', sqft:0, rate:0, company:'', purpose:''}, i);
   wrap.appendChild(div.firstElementChild);
 }
 
-function heditRemoveProduct(i) {
-  const el = document.getElementById(`hep-wrap-${i}`);
-  if(el) el.remove();
-  // Renumber visible products
-  const prods = document.querySelectorAll('#he-products .hedit-prod');
-  prods.forEach((el, newIdx) => {
-    const ttl = el.querySelector('.hedit-prod-ttl span');
-    if(ttl) ttl.textContent = `🧱 Product ${newIdx+1}`;
-  });
-  if(!prods.length) document.getElementById('he-products').innerHTML = '<div style="color:var(--silver);font-size:.82rem;padding:6px 0">No tile products.</div>';
+function heditAddOtherItem() {
+  const wrap = document.getElementById('he-others');
+  if(wrap.children[0]?.textContent?.includes('No other')) wrap.innerHTML = '';
+  const i = _heditOthCount++;
+  const div = document.createElement('div');
+  div.innerHTML = _heditBuildOthHTML({name:'', qty:0, rate:0}, i);
+  wrap.appendChild(div.firstElementChild);
 }
 
 function openHistEdit(id) {
@@ -2175,16 +2205,13 @@ function openHistEdit(id) {
   const computed = h.computed||[];
   _heditProdCount = computed.length;
   document.getElementById('he-products').innerHTML = computed.length
-    ? computed.map((p,i) => _heditBuildProdHTML(p, i, computed.length > 1)).join('')
+    ? computed.map((p,i) => _heditBuildProdHTML(p, i)).join('')
     : '<div style="color:var(--silver);font-size:.82rem;padding:6px 0">No tile products in this entry.</div>';
 
-  document.getElementById('he-others').innerHTML = (h.otherItems||[]).length
-    ? (h.otherItems||[]).map((it,i) => `
-      <div class="hedit-oth-row">
-        <div class="hedit-field"><label>Item Name</label><input type="text" id="heo-${i}-name" value="${it.name||''}"></div>
-        <div class="hedit-field"><label>Qty</label><input type="number" id="heo-${i}-qty" value="${it.qty||0}" min="0" step="1"></div>
-        <div class="hedit-field"><label>Rate ৳</label><input type="number" id="heo-${i}-rate" value="${it.rate||0}" min="0" step="1"></div>
-      </div>`).join('')
+  const others = h.otherItems||[];
+  _heditOthCount = others.length;
+  document.getElementById('he-others').innerHTML = others.length
+    ? others.map((it,i) => _heditBuildOthHTML(it, i)).join('')
     : '<div style="color:var(--silver);font-size:.82rem;padding:6px 0">No other items in this entry.</div>';
 
   document.getElementById('histEditModal').classList.add('hedit-open');
@@ -2211,12 +2238,13 @@ function saveHistEdit() {
   h.paidAmount = parseFloat(document.getElementById('he-paid').value)||0;
   h.remark     = document.getElementById('he-remark').value.trim();
 
-  // Read all visible product cards from DOM (id=hep-wrap-N)
+  // Read non-removed product cards from DOM
   let newGrandArea = 0, newGrandTotal = 0;
   const newComputed = [];
+  let origPIdx = 0;
   document.querySelectorAll('#he-products .hedit-prod').forEach(card => {
-    const wrapId = card.id; // hep-wrap-N
-    const i = parseInt(wrapId.replace('hep-wrap-',''));
+    if(card.classList.contains('hedit-removed')) { origPIdx++; return; }
+    const i = parseInt(card.id.replace('hep-wrap-',''));
     const size    = document.getElementById(`hep-${i}-size`)?.value || '8x12';
     const sq      = parseFloat(document.getElementById(`hep-${i}-sqft`)?.value)||0;
     const rate    = parseFloat(document.getElementById(`hep-${i}-rate`)?.value)||0;
@@ -2225,22 +2253,28 @@ function saveHistEdit() {
     const company = coSel === 'Custom Company'
       ? ((document.getElementById(`hep-${i}-customco`)?.value||'').trim() || 'Custom Company')
       : coSel;
-    // Keep original res if it exists and size didn't change, else stub it
-    const origP = (orig.computed||[]).find((_,oi) => oi === newComputed.length);
+    const origP = (orig.computed||[])[origPIdx];
     const res = (origP && origP.size === size) ? origP.res : { total: 0, step: 0, riser: 0 };
     newGrandArea  += sq;
     newGrandTotal += res.total || 0;
     newComputed.push({...(origP||{}), size, sqft: sq, rate, purpose, company, res});
+    origPIdx++;
   });
   h.computed   = newComputed;
   h.grandArea  = parseFloat(newGrandArea.toFixed(2));
   h.grandTotal = newGrandTotal;
 
-  h.otherItems.forEach((it, i) => {
-    it.name = (document.getElementById(`heo-${i}-name`)?.value||'').trim()||it.name||'';
-    it.qty  = parseFloat(document.getElementById(`heo-${i}-qty`)?.value)||0;
-    it.rate = parseFloat(document.getElementById(`heo-${i}-rate`)?.value)||0;
+  // Read other items from DOM, skip removed rows
+  const newOtherItems = [];
+  document.querySelectorAll('#he-others .hedit-oth-row').forEach(row => {
+    if(row.classList.contains('hedit-removed')) return;
+    const i = parseInt(row.id.replace('heo-wrap-',''));
+    const name = (document.getElementById(`heo-${i}-name`)?.value||'').trim();
+    const qty  = parseFloat(document.getElementById(`heo-${i}-qty`)?.value)||0;
+    const rate = parseFloat(document.getElementById(`heo-${i}-rate`)?.value)||0;
+    if(name || qty || rate) newOtherItems.push({name, qty, rate});
   });
+  h.otherItems = newOtherItems;
 
   all[idx] = h;
   saveHistory(all);
@@ -3271,7 +3305,13 @@ refreshHomeStats();
       </div>
       <div id="he-products"></div>
 
-      <div class="hedit-sec">Other Items</div>
+      <div class="hedit-sec" style="display:flex;justify-content:space-between;align-items:center">
+        <span>Other Items</span>
+        <button onclick="heditAddOtherItem()" style="background:rgba(200,160,64,.15);border:1px solid rgba(200,160,64,.35);color:var(--gold-light);border-radius:8px;padding:4px 12px;font-size:.72rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Item
+        </button>
+      </div>
       <div id="he-others"></div>
     </div>
     <div class="hedit-footer">
