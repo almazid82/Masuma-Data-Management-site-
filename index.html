@@ -527,6 +527,84 @@ footer span{color:var(--gold);opacity:1;}
 html.light-mode .an-card{background:rgba(255,255,255,.9);}
 html.light-mode .an-chart-wrap,html.light-mode .an-table-wrap{background:rgba(255,255,255,.88);}
 html.light-mode .an-table td{color:var(--chrome);}
+/* ═══ BUSINESS INTELLIGENCE REPORTS ═══ */
+.rpt-wrap{max-width:980px;margin:0 auto;}
+.rpt-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.rpt-title{font-family:var(--font-head);font-size:1.6rem;font-weight:700;background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rpt-pdf-btn{background:linear-gradient(135deg,#6B46C1,#44337A);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:opacity .2s;letter-spacing:.02em;}
+.rpt-pdf-btn:hover{opacity:.85;}
+.rpt-period-wrap{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.rpt-period-btn{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--silver);border-radius:8px;padding:6px 14px;font-size:.78rem;cursor:pointer;transition:all .2s;}
+.rpt-period-btn.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600;}
+.rpt-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
+.rpt-tab-btn{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--silver);border-radius:10px;padding:8px 14px;font-size:.76rem;cursor:pointer;transition:all .2s;font-weight:500;}
+.rpt-tab-btn.active{background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));color:#000;border-color:transparent;font-weight:700;}
+.rpt-section{display:none;}
+.rpt-section.rpt-active{display:block;}
+.rpt-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-bottom:18px;}
+.rpt-kpi{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:14px;padding:16px 12px;text-align:center;border-top:2px solid var(--gold-dark);}
+.rpt-kpi-icon{font-size:1.35rem;margin-bottom:4px;}
+.rpt-kpi-val{font-family:var(--font-head);font-size:1.25rem;font-weight:700;color:var(--gold-light);}
+.rpt-kpi-label{font-size:.64rem;color:var(--silver);margin-top:3px;text-transform:uppercase;letter-spacing:.07em;}
+.rpt-kpi-delta{font-size:.69rem;margin-top:5px;font-weight:600;padding:2px 7px;border-radius:20px;display:inline-block;}
+.rpt-kpi-delta.up{color:#48bb78;background:rgba(72,187,120,.12);}
+.rpt-kpi-delta.down{color:#fc8181;background:rgba(252,129,129,.12);}
+.rpt-kpi-delta.flat{color:var(--silver);background:rgba(255,255,255,.07);}
+.rpt-card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:18px;margin-bottom:16px;}
+.rpt-card-title{font-family:var(--font-head);font-size:.9rem;font-weight:600;color:var(--chrome);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--glass-border);display:flex;align-items:center;gap:8px;}
+.rpt-g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+@media(max-width:640px){.rpt-g2{grid-template-columns:1fr;}}
+.rpt-insight-list{display:flex;flex-direction:column;gap:8px;}
+.rpt-insight{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:11px;font-size:.81rem;line-height:1.55;}
+.rpt-insight.pos{background:rgba(72,187,120,.1);border:1px solid rgba(72,187,120,.25);color:#48bb78;}
+.rpt-insight.neg{background:rgba(252,129,129,.1);border:1px solid rgba(252,129,129,.25);color:#fc8181;}
+.rpt-insight.warn{background:rgba(246,173,85,.1);border:1px solid rgba(246,173,85,.25);color:#f6ad55;}
+.rpt-insight.info{background:rgba(66,153,225,.1);border:1px solid rgba(66,153,225,.25);color:#63b3ed;}
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+@media(max-width:580px){.swot-grid{grid-template-columns:1fr;}}
+.swot-box{border-radius:13px;padding:16px;}
+.sw-s{background:rgba(72,187,120,.08);border:1px solid rgba(72,187,120,.28);}
+.sw-w{background:rgba(252,129,129,.08);border:1px solid rgba(252,129,129,.28);}
+.sw-o{background:rgba(66,153,225,.08);border:1px solid rgba(66,153,225,.28);}
+.sw-t{background:rgba(237,137,54,.08);border:1px solid rgba(237,137,54,.28);}
+.swot-ttl{font-weight:700;font-size:.85rem;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.sw-s .swot-ttl{color:#48bb78;}.sw-w .swot-ttl{color:#fc8181;}.sw-o .swot-ttl{color:#63b3ed;}.sw-t .swot-ttl{color:#f6ad55;}
+.swot-li{font-size:.78rem;color:var(--chrome);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.5;display:flex;gap:7px;}
+.swot-li:last-child{border-bottom:none;}
+.rpt-rec-list{display:flex;flex-direction:column;gap:9px;}
+.rpt-rec{padding:13px 15px;border-radius:11px;font-size:.81rem;line-height:1.6;}
+.rpt-rec.rc-action{background:linear-gradient(135deg,rgba(200,160,64,.1),rgba(200,160,64,.05));border:1px solid rgba(200,160,64,.28);}
+.rpt-rec.rc-warn{background:rgba(252,129,129,.07);border:1px solid rgba(252,129,129,.28);}
+.rpt-rec.rc-growth{background:rgba(72,187,120,.07);border:1px solid rgba(72,187,120,.28);}
+.rpt-rec.rc-info{background:rgba(66,153,225,.07);border:1px solid rgba(66,153,225,.28);}
+.rpt-rec-tag{font-weight:700;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.rc-action .rpt-rec-tag{color:var(--gold-light);}.rc-warn .rpt-rec-tag{color:#fc8181;}.rc-growth .rpt-rec-tag{color:#48bb78;}.rc-info .rpt-rec-tag{color:#63b3ed;}
+.rpt-rec-txt{color:var(--chrome);}
+.rpt-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;font-size:.78rem;}
+.rpt-bar-lbl{width:115px;flex-shrink:0;color:var(--chrome);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.74rem;}
+.rpt-bar-track{flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:7px;}
+.rpt-bar-fill{height:7px;border-radius:4px;}
+.rpt-bar-val{width:80px;text-align:right;color:var(--gold-light);font-weight:600;font-size:.74rem;flex-shrink:0;}
+.rpt-g-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--glass-border);font-size:.82rem;}
+.rpt-g-row:last-child{border-bottom:none;}
+.rpt-g-key{color:var(--silver);}
+.rpt-g-val{font-weight:600;color:var(--chrome);}
+.rpt-health-score{display:flex;align-items:center;gap:18px;margin-bottom:16px;padding:18px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;}
+.rhs-circle{width:80px;height:80px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;border:3px solid;}
+.rhs-circle.good{border-color:#48bb78;color:#48bb78;background:rgba(72,187,120,.1);}
+.rhs-circle.ok{border-color:#f6ad55;color:#f6ad55;background:rgba(246,173,85,.1);}
+.rhs-circle.poor{border-color:#fc8181;color:#fc8181;background:rgba(252,129,129,.1);}
+.rhs-num{font-size:1.55rem;font-family:var(--font-head);line-height:1;}
+.rhs-lbl{font-size:.54rem;text-transform:uppercase;letter-spacing:.06em;margin-top:3px;}
+.rhs-meta{flex:1;}
+.rhs-title{font-size:.95rem;font-weight:700;color:var(--chrome);margin-bottom:3px;}
+.rhs-sub{font-size:.77rem;color:var(--silver);line-height:1.5;}
+.rpt-seg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
+.rpt-seg-box{border-radius:10px;padding:12px;text-align:center;}
+.rpt-seg-val{font-size:1.3rem;font-weight:700;}
+.rpt-seg-lbl{font-size:.64rem;color:var(--silver);text-transform:uppercase;letter-spacing:.05em;margin-top:3px;}
+html.light-mode .rpt-kpi,html.light-mode .rpt-card{background:rgba(255,255,255,.9);}
+html.light-mode .rpt-health-score{background:rgba(255,255,255,.88);}
 </style>
 </head>
 <body>
@@ -579,6 +657,10 @@ html.light-mode .an-table td{color:var(--chrome);}
     <div class="nav-link" id="nav-analytics" onclick="navigate('analytics')">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       Analytics
+    </div>
+    <div class="nav-link" id="nav-reports" onclick="navigate('reports')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Reports
     </div>
     <div class="nav-link" id="nav-about" onclick="navigate('about')">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -902,6 +984,39 @@ html.light-mode .an-table td{color:var(--chrome);}
     </div>
   </section>
 
+  <!-- ══ REPORTS PAGE ══ -->
+  <section class="page-section" id="page-reports">
+    <div class="rpt-wrap">
+      <div class="rpt-header">
+        <div class="rpt-title">📈 Business Intelligence</div>
+        <button class="rpt-pdf-btn" onclick="printBizReportPDF()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF Report
+        </button>
+      </div>
+      <div class="rpt-period-wrap">
+        <button class="rpt-period-btn active" onclick="setRptPeriod('all',this)">All Time</button>
+        <button class="rpt-period-btn" onclick="setRptPeriod('year',this)">This Year</button>
+        <button class="rpt-period-btn" onclick="setRptPeriod('month',this)">This Month</button>
+        <button class="rpt-period-btn" onclick="setRptPeriod('week',this)">This Week</button>
+      </div>
+      <div class="rpt-tabs">
+        <button class="rpt-tab-btn active" onclick="setRptTab('Overview',this)">📊 Overview</button>
+        <button class="rpt-tab-btn" onclick="setRptTab('Products',this)">🧱 Products</button>
+        <button class="rpt-tab-btn" onclick="setRptTab('Customers',this)">👥 Customers</button>
+        <button class="rpt-tab-btn" onclick="setRptTab('Due',this)">💰 Due & Collection</button>
+        <button class="rpt-tab-btn" onclick="setRptTab('Brands',this)">🏭 Brands</button>
+        <button class="rpt-tab-btn" onclick="setRptTab('Advisor',this)">🤖 AI Advisor</button>
+      </div>
+      <div id="rptOverview" class="rpt-section rpt-active"></div>
+      <div id="rptProducts" class="rpt-section"></div>
+      <div id="rptCustomers" class="rpt-section"></div>
+      <div id="rptDue" class="rpt-section"></div>
+      <div id="rptBrands" class="rpt-section"></div>
+      <div id="rptAdvisor" class="rpt-section"></div>
+    </div>
+  </section>
+
   <!-- ══ ABOUT PAGE ══ -->
   <section class="page-section" id="page-about">
     <div class="about-wrap">
@@ -1079,6 +1194,7 @@ function navigate(page) {
   if(page === 'home') refreshHomeStats();
   if(page === 'history') { currentPage = 1; applyFilters(); }
   if(page === 'analytics') buildAnalytics();
+  if(page === 'reports') buildBusinessReport();
 }
 
 function toggleMobileNav() {
@@ -2205,6 +2321,684 @@ function exportCSV() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+// ════════════════════════════════════════
+// BUSINESS INTELLIGENCE REPORT SYSTEM
+// ════════════════════════════════════════
+let _rptPeriod = 'all';
+
+function setRptPeriod(p, btn) {
+  _rptPeriod = p;
+  document.querySelectorAll('.rpt-period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildBusinessReport();
+}
+
+function setRptTab(tab, btn) {
+  document.querySelectorAll('.rpt-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.rpt-section').forEach(s => s.classList.remove('rpt-active'));
+  document.getElementById('rpt' + tab).classList.add('rpt-active');
+}
+
+function filterByRptPeriod(arr) {
+  const now = new Date();
+  if(_rptPeriod === 'week') return arr.filter(h => h.savedAtTs >= now.getTime() - 7*24*60*60*1000);
+  if(_rptPeriod === 'month') return arr.filter(h => { const d=new Date(h.savedAtTs||0); return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear(); });
+  if(_rptPeriod === 'year') return arr.filter(h => new Date(h.savedAtTs||0).getFullYear()===now.getFullYear());
+  return arr;
+}
+
+function computeBizMetrics(arr, all) {
+  const now = new Date();
+  let totalRevenue=0, totalPaid=0, totalSqft=0;
+  arr.forEach(h => { totalRevenue+=calcOrderRevenue(h); totalPaid+=h.paidAmount||0; totalSqft+=h.grandArea||0; });
+  const totalDue = Math.max(0, totalRevenue - totalPaid);
+  const collectionRate = totalRevenue > 0 ? totalPaid/totalRevenue*100 : 0;
+  const totalOrders = arr.length;
+  const avgOrder = totalOrders > 0 ? totalRevenue/totalOrders : 0;
+
+  // Monthly data (always from all history)
+  const monthlyData = [];
+  for(let i=11; i>=0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+    const lbl = d.toLocaleString('default',{month:'short'})+"'"+String(d.getFullYear()).slice(2);
+    let mRev=0, mPaid=0, mOrders=0;
+    all.forEach(h => {
+      const hd = new Date(h.savedAtTs||0);
+      if(hd.getMonth()===d.getMonth()&&hd.getFullYear()===d.getFullYear()) { mRev+=calcOrderRevenue(h); mPaid+=h.paidAmount||0; mOrders++; }
+    });
+    monthlyData.push({label:lbl, revenue:mRev, paid:mPaid, orders:mOrders});
+  }
+  const thisMonthRev = monthlyData[11].revenue;
+  const lastMonthRev = monthlyData[10].revenue;
+  const momGrowth = lastMonthRev > 0 ? (thisMonthRev-lastMonthRev)/lastMonthRev*100 : (thisMonthRev>0?100:0);
+  const maxMonth = monthlyData.reduce((best,m) => m.revenue>best.revenue?m:best, monthlyData[0]);
+
+  // Year comparison
+  let thisYearRev=0, lastYearRev=0;
+  all.forEach(h => {
+    const yr = new Date(h.savedAtTs||0).getFullYear();
+    if(yr===now.getFullYear()) thisYearRev+=calcOrderRevenue(h);
+    else if(yr===now.getFullYear()-1) lastYearRev+=calcOrderRevenue(h);
+  });
+
+  // Products
+  const prodMap = {};
+  arr.forEach(h => {
+    (h.computed||[]).forEach(p => {
+      const key = tileSizeNames[p.size]||p.size;
+      if(!prodMap[key]) prodMap[key] = {sqft:0, revenue:0, orders:0, recentOrders:0};
+      prodMap[key].sqft += p.sqft||0;
+      prodMap[key].revenue += p.rate>0 ? p.sqft*p.rate : 0;
+      prodMap[key].orders++;
+      const ts = h.savedAtTs||0;
+      if(ts >= now.getTime()-30*24*60*60*1000) prodMap[key].recentOrders++;
+    });
+    (h.otherItems||[]).forEach(it => {
+      const key = it.name||'Other Item';
+      if(!prodMap[key]) prodMap[key] = {sqft:0, revenue:0, orders:0, recentOrders:0, isOther:true};
+      prodMap[key].revenue += it.rate>0 ? it.qty*it.rate : 0;
+      prodMap[key].orders++;
+    });
+  });
+  const prodEntries = Object.entries(prodMap).sort((a,b) => b[1].revenue-a[1].revenue);
+  const totalProdRev = prodEntries.reduce((s,[,d]) => s+d.revenue, 0);
+
+  // Customers
+  const custMap = {};
+  arr.forEach(h => {
+    const name = ((h.customer||'').trim()||'Unknown');
+    if(!custMap[name]) custMap[name] = {orders:0, revenue:0, paid:0, due:0, sqft:0, lastTs:0, phone:h.phone||''};
+    const rev = calcOrderRevenue(h);
+    custMap[name].orders++;
+    custMap[name].revenue += rev;
+    custMap[name].paid += h.paidAmount||0;
+    custMap[name].due += Math.max(0, rev-(h.paidAmount||0));
+    custMap[name].sqft += h.grandArea||0;
+    if((h.savedAtTs||0)>custMap[name].lastTs) custMap[name].lastTs = h.savedAtTs||0;
+  });
+  const custEntries = Object.entries(custMap).sort((a,b) => b[1].revenue-a[1].revenue);
+  const uniqueCustomers = custEntries.length;
+  const topCustShare = totalRevenue>0 && custEntries.length ? custEntries[0][1].revenue/totalRevenue*100 : 0;
+  const riskyCustomers = custEntries.filter(([,d]) => d.due>0).sort((a,b) => b[1].due-a[1].due);
+
+  // Brands
+  const brandMap = {};
+  arr.forEach(h => {
+    (h.computed||[]).forEach(p => {
+      const co = (p.company||'Unknown').replace(/\s*\(.*?\)\s*$/,'').trim()||'Unknown';
+      if(!brandMap[co]) brandMap[co] = {sqft:0, revenue:0, orderSet:new Set()};
+      brandMap[co].sqft += p.sqft||0;
+      brandMap[co].revenue += p.rate>0 ? p.sqft*p.rate : 0;
+      brandMap[co].orderSet.add(h.receiptNo||h.savedAtTs);
+    });
+  });
+  const brandEntries = Object.entries(brandMap).map(([n,d]) => [n,{...d, orders:d.orderSet.size}]).sort((a,b) => b[1].revenue-a[1].revenue);
+  const totalBrandRev = brandEntries.reduce((s,[,d]) => s+d.revenue, 0);
+  const topBrandShare = totalBrandRev>0 && brandEntries.length ? brandEntries[0][1].revenue/totalBrandRev*100 : 0;
+
+  // Health score
+  let score = 50;
+  if(collectionRate>=90) score+=20; else if(collectionRate>=75) score+=10; else if(collectionRate<50) score-=15;
+  if(momGrowth>10) score+=15; else if(momGrowth>0) score+=7; else if(momGrowth<-10) score-=15;
+  if(topCustShare<25) score+=10; else if(topCustShare>50) score-=10;
+  if(topBrandShare<40) score+=5; else if(topBrandShare>70) score-=10;
+  if(uniqueCustomers>10) score+=5;
+  score = Math.min(100, Math.max(0, Math.round(score)));
+
+  return { totalRevenue, totalPaid, totalDue, totalSqft, totalOrders, uniqueCustomers,
+    collectionRate, avgOrder, momGrowth, monthlyData, maxMonth, thisYearRev, lastYearRev,
+    thisMonthRev, lastMonthRev, prodMap, prodEntries, totalProdRev,
+    custMap, custEntries, topCustShare, brandMap, brandEntries, totalBrandRev,
+    topBrandShare, riskyCustomers, score };
+}
+
+function buildBusinessReport() {
+  const all = loadHistory();
+  const arr = filterByRptPeriod(all);
+  const m = computeBizMetrics(arr, all);
+  renderRptOverview(m);
+  renderRptProducts(m);
+  renderRptCustomers(m);
+  renderRptDue(m);
+  renderRptBrands(m);
+  renderRptAdvisor(m);
+}
+
+function _ins(type, icon, txt) {
+  return `<div class="rpt-insight ${type}"><span style="flex-shrink:0">${icon}</span><span>${txt}</span></div>`;
+}
+
+function renderRptOverview(m) {
+  const grow = m.momGrowth;
+  const growTag = grow>0 ? `<span class="rpt-kpi-delta up">▲ ${grow.toFixed(1)}% MoM</span>` : grow<-1 ? `<span class="rpt-kpi-delta down">▼ ${Math.abs(grow).toFixed(1)}% MoM</span>` : `<span class="rpt-kpi-delta flat">→ Stable</span>`;
+  const collClass = m.collectionRate>=80?'up':m.collectionRate>=60?'flat':'down';
+
+  const last6 = m.monthlyData.slice(6);
+  const maxRev = Math.max(...last6.map(d=>d.revenue), 1);
+  const miniChart = `<div style="display:flex;height:110px;gap:5px;align-items:stretch">
+    ${last6.map(d => {
+      const h = Math.max(Math.round(d.revenue/maxRev*100), d.revenue>0?3:1);
+      return `<div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1">
+        <div style="font-size:.58rem;color:var(--gold-light);font-weight:600">${d.revenue>0?'৳'+Math.round(d.revenue/1000)+'K':''}</div>
+        <div style="flex:1;display:flex;align-items:flex-end;width:100%"><div style="width:100%;background:${d.revenue>0?'var(--gold)':'rgba(255,255,255,.08)'};border-radius:3px 3px 0 0;height:${h}%"></div></div>
+        <div style="font-size:.58rem;color:var(--silver)">${d.label}</div>
+      </div>`;
+    }).join('')}
+  </div>`;
+
+  const ins = [];
+  if(grow>10) ins.push(_ins('pos','📈',`এই মাসে revenue আগের মাসের চেয়ে <strong>${grow.toFixed(1)}%</strong> বৃদ্ধি পেয়েছে।`));
+  else if(grow<-5) ins.push(_ins('neg','📉',`এই মাসে revenue আগের মাসের চেয়ে <strong>${Math.abs(grow).toFixed(1)}%</strong> কমেছে।`));
+  else ins.push(_ins('info','📊','Revenue এই মাসে তুলনামূলক stable আছে।'));
+  if(m.collectionRate>=85) ins.push(_ins('pos','✅',`Collection efficiency ভালো — <strong>${m.collectionRate.toFixed(0)}%</strong> payment collected।`));
+  else if(m.collectionRate<60) ins.push(_ins('neg','⚠️',`Collection rate মাত্র <strong>${m.collectionRate.toFixed(0)}%</strong>। Outstanding: ৳${Math.round(m.totalDue).toLocaleString('en-IN')}।`));
+  else ins.push(_ins('warn','💰',`Collection rate <strong>${m.collectionRate.toFixed(0)}%</strong>। Outstanding due: ৳${Math.round(m.totalDue).toLocaleString('en-IN')}।`));
+  if(m.topCustShare>40) ins.push(_ins('warn','👤',`Top customer মোট revenue-এর <strong>${m.topCustShare.toFixed(0)}%</strong>। Customer diversification দরকার।`));
+  if(m.topBrandShare>60) ins.push(_ins('warn','🏭',`একটি brand থেকে tile revenue-এর <strong>${m.topBrandShare.toFixed(0)}%</strong> আসছে।`));
+  if(m.maxMonth.revenue>0) ins.push(_ins('info','📅',`সবচেয়ে বেশি revenue <strong>${m.maxMonth.label}</strong> মাসে — ৳${Math.round(m.maxMonth.revenue).toLocaleString('en-IN')}।`));
+  if(m.uniqueCustomers>=10) ins.push(_ins('pos','👥',`মোট <strong>${m.uniqueCustomers}জন</strong> unique customer — customer base ভালো।`));
+
+  document.getElementById('rptOverview').innerHTML = `
+    <div class="rpt-kpi-grid">
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">💰</div><div class="rpt-kpi-val">${m.totalRevenue>0?'৳'+Math.round(m.totalRevenue).toLocaleString('en-IN'):'—'}</div><div class="rpt-kpi-label">Total Revenue</div>${growTag}</div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">📦</div><div class="rpt-kpi-val">${m.totalOrders}</div><div class="rpt-kpi-label">Total Orders</div></div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">👥</div><div class="rpt-kpi-val">${m.uniqueCustomers}</div><div class="rpt-kpi-label">Customers</div></div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">📐</div><div class="rpt-kpi-val">${m.totalSqft.toFixed(0)}</div><div class="rpt-kpi-label">Sqft Sold</div></div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">✅</div><div class="rpt-kpi-val" style="color:${m.collectionRate>=80?'#48bb78':m.collectionRate>=60?'#f6ad55':'#fc8181'}">${m.collectionRate.toFixed(0)}%</div><div class="rpt-kpi-label">Collection Rate</div><span class="rpt-kpi-delta ${collClass}">${m.collectionRate.toFixed(0)}% collected</span></div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">⚠️</div><div class="rpt-kpi-val" style="color:${m.totalDue>0?'#fc8181':'#48bb78'}">${m.totalDue>0?'৳'+Math.round(m.totalDue).toLocaleString('en-IN'):'৳ 0'}</div><div class="rpt-kpi-label">Outstanding Due</div></div>
+    </div>
+    <div class="rpt-card"><div class="rpt-card-title">📊 Revenue Trend — Last 6 Months</div>${miniChart}</div>
+    <div class="rpt-card"><div class="rpt-card-title">💡 Key Findings</div><div class="rpt-insight-list">${ins.join('')}</div></div>
+    <div class="rpt-card">
+      <div class="rpt-card-title">📅 Financial Summary</div>
+      <div class="rpt-g-row"><div class="rpt-g-key">এই মাসের Revenue</div><div class="rpt-g-val" style="color:var(--gold-light)">${m.thisMonthRev>0?'৳'+Math.round(m.thisMonthRev).toLocaleString('en-IN'):'—'}</div></div>
+      <div class="rpt-g-row"><div class="rpt-g-key">গত মাসের Revenue</div><div class="rpt-g-val">${m.lastMonthRev>0?'৳'+Math.round(m.lastMonthRev).toLocaleString('en-IN'):'—'}</div></div>
+      <div class="rpt-g-row"><div class="rpt-g-key">এই বছরের মোট Revenue</div><div class="rpt-g-val" style="color:var(--gold-light)">${m.thisYearRev>0?'৳'+Math.round(m.thisYearRev).toLocaleString('en-IN'):'—'}</div></div>
+      <div class="rpt-g-row"><div class="rpt-g-key">গত বছরের Revenue</div><div class="rpt-g-val">${m.lastYearRev>0?'৳'+Math.round(m.lastYearRev).toLocaleString('en-IN'):'—'}</div></div>
+      <div class="rpt-g-row"><div class="rpt-g-key">গড় Order মূল্য</div><div class="rpt-g-val">${m.avgOrder>0?'৳'+Math.round(m.avgOrder).toLocaleString('en-IN'):'—'}</div></div>
+      <div class="rpt-g-row"><div class="rpt-g-key">মোট Collected</div><div class="rpt-g-val" style="color:#48bb78">${m.totalPaid>0?'৳'+Math.round(m.totalPaid).toLocaleString('en-IN'):'—'}</div></div>
+      <div class="rpt-g-row"><div class="rpt-g-key">মোট Outstanding Due</div><div class="rpt-g-val" style="color:${m.totalDue>0?'#fc8181':'#48bb78'}">${m.totalDue>0?'৳'+Math.round(m.totalDue).toLocaleString('en-IN'):'✓ Clear'}</div></div>
+    </div>`;
+}
+
+function renderRptProducts(m) {
+  const colors = ['#C8A040','#4299e1','#48bb78','#ed8936','#9f7aea','#f687b3','#38b2ac','#fc8181','#68d391','#fbd38d'];
+  const top8 = m.prodEntries.slice(0, 8);
+  const totalRev = m.totalProdRev || 1;
+  const fast = [...m.prodEntries].filter(([,d])=>!d.isOther).sort((a,b)=>b[1].recentOrders-a[1].recentOrders).slice(0,5);
+  const slow = [...m.prodEntries].filter(([,d])=>!d.isOther&&d.revenue>0).sort((a,b)=>a[1].recentOrders-b[1].recentOrders).slice(0,5);
+
+  const bars = top8.map(([name,d],i) => {
+    const pct = (d.revenue/totalRev*100).toFixed(0);
+    return `<div class="rpt-bar-row"><div class="rpt-bar-lbl" style="color:${colors[i%colors.length]}">${name}</div><div class="rpt-bar-track"><div class="rpt-bar-fill" style="width:${pct}%;background:${colors[i%colors.length]}"></div></div><div class="rpt-bar-val">${pct}%</div></div>`;
+  }).join('');
+
+  const trows = top8.map(([name,d],i) => `<tr>
+    <td><span class="an-rank" style="color:${colors[i%colors.length]}">${i+1}</span></td>
+    <td>${name}</td><td>${d.sqft>0?d.sqft.toFixed(0)+' sqft':'—'}</td>
+    <td>${d.orders}</td>
+    <td style="color:var(--gold-light);font-weight:600">${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td>
+    <td>${(d.revenue/totalRev*100).toFixed(1)}%</td></tr>`).join('');
+
+  const ins = [];
+  if(top8.length>0) ins.push(_ins('pos','🏆',`<strong>${top8[0][0]}</strong> সবচেয়ে বেশি বিক্রিত — মোটের <strong>${(top8[0][1].revenue/totalRev*100).toFixed(1)}%</strong>।`));
+  if(m.prodEntries.length>=3) { const t3 = m.prodEntries.slice(0,3).reduce((s,[,d])=>s+d.revenue,0)/totalRev*100; ins.push(_ins('info','📊',`Top 3 product মিলিয়ে মোট revenue-এর <strong>${t3.toFixed(0)}%</strong> আসছে।`)); }
+  if(fast.length>0&&fast[0][1].recentOrders>2) ins.push(_ins('pos','🚀',`<strong>${fast[0][0]}</strong> গত ৩০ দিনে সবচেয়ে বেশি বিক্রিত (${fast[0][1].recentOrders} orders)।`));
+  if(slow.length>0&&slow[0][1].recentOrders===0) ins.push(_ins('warn','⚠️',`<strong>${slow[0][0]}</strong> গত ৩০ দিনে কোনো sale নেই। Promotion বিবেচনা করুন।`));
+
+  document.getElementById('rptProducts').innerHTML = `
+    <div class="rpt-card"><div class="rpt-card-title">📊 Product Revenue Share</div>${bars}</div>
+    <div class="rpt-card"><div class="rpt-card-title">🏆 Top Products by Revenue</div>
+      <div style="overflow-x:auto"><table class="an-table"><thead><tr><th>#</th><th>Product</th><th>Sqft</th><th>Orders</th><th>Revenue</th><th>Share</th></tr></thead><tbody>${trows}</tbody></table></div></div>
+    <div class="rpt-g2">
+      <div class="rpt-card"><div class="rpt-card-title">🚀 Fast Moving (Last 30 Days)</div>
+        ${fast.length?fast.map(([n,d])=>`<div class="rpt-g-row"><div class="rpt-g-key">${n}</div><div class="rpt-g-val" style="color:#48bb78">${d.recentOrders} orders</div></div>`).join(''):'<div class="an-empty">—</div>'}</div>
+      <div class="rpt-card"><div class="rpt-card-title">🐢 Slow Moving Products</div>
+        ${slow.length?slow.map(([n,d])=>`<div class="rpt-g-row"><div class="rpt-g-key">${n}</div><div class="rpt-g-val" style="color:${d.recentOrders===0?'#fc8181':'#f6ad55'}">${d.recentOrders===0?'No recent sale':d.recentOrders+' orders'}</div></div>`).join(''):'<div class="an-empty">—</div>'}</div>
+    </div>
+    <div class="rpt-card"><div class="rpt-card-title">💡 Product Insights</div><div class="rpt-insight-list">${ins.join('')}</div></div>`;
+}
+
+function renderRptCustomers(m) {
+  const totalRev = m.totalRevenue || 1;
+  const top8 = m.custEntries.slice(0,8);
+  const vip = m.custEntries.filter(([,d]) => d.revenue>=totalRev*0.15);
+  const regular = m.custEntries.filter(([,d]) => d.revenue>=totalRev*0.05 && d.revenue<totalRev*0.15);
+  const occasional = m.custEntries.filter(([,d]) => d.revenue<totalRev*0.05);
+
+  const crows = top8.map(([name,d],i) => `<tr>
+    <td><span class="an-rank">${i+1}</span></td>
+    <td>${name}${d.phone?`<br><span style="font-size:.65rem;color:var(--silver)">${d.phone}</span>`:''}</td>
+    <td>${d.orders}</td>
+    <td style="color:var(--gold-light);font-weight:600">৳${Math.round(d.revenue).toLocaleString('en-IN')}</td>
+    <td>${(d.revenue/totalRev*100).toFixed(1)}%</td>
+    <td style="color:${d.due>0?'#fc8181':'#48bb78'}">${d.due>0?'৳'+Math.round(d.due).toLocaleString('en-IN'):'✓ Clear'}</td></tr>`).join('');
+
+  const ins = [];
+  if(m.topCustShare>30) ins.push(_ins('warn','⚠️',`Top customer মোট revenue-এর <strong>${m.topCustShare.toFixed(0)}%</strong> — অতিরিক্ত নির্ভরতা।`));
+  if(vip.length>0) ins.push(_ins('pos','⭐',`<strong>${vip.length}জন VIP customer</strong> আছেন — তাদের সাথে সম্পর্ক মজবুত রাখুন।`));
+  if(m.riskyCustomers.length>0) ins.push(_ins('neg','🚨',`<strong>${m.riskyCustomers[0][0]}</strong>-এর সবচেয়ে বেশি due: ৳${Math.round(m.riskyCustomers[0][1].due).toLocaleString('en-IN')}।`));
+  if(occasional.length>m.custEntries.length*0.5&&occasional.length>3) ins.push(_ins('info','💡',`${occasional.length}জন customer কম কিনছেন। Re-engagement প্রয়োজন।`));
+  if(m.uniqueCustomers>15) ins.push(_ins('pos','👥',`${m.uniqueCustomers}জন customer — বৈচিত্র্যময় customer base ব্যবসার জন্য ভালো।`));
+
+  const duePriority = m.riskyCustomers.slice(0,6).map(([name,d]) => `<tr>
+    <td style="font-weight:600;color:var(--chrome)">${name}</td>
+    <td style="font-size:.72rem;color:var(--silver)">${d.phone||'—'}</td>
+    <td>${d.orders}</td>
+    <td>৳${Math.round(d.revenue).toLocaleString('en-IN')}</td>
+    <td style="color:#fc8181;font-weight:700">৳${Math.round(d.due).toLocaleString('en-IN')}</td></tr>`).join('');
+
+  document.getElementById('rptCustomers').innerHTML = `
+    <div class="rpt-card"><div class="rpt-card-title">👥 Customer Segmentation</div>
+      <div class="rpt-seg-grid">
+        <div class="rpt-seg-box" style="background:rgba(212,168,71,.1);border:1px solid rgba(212,168,71,.25)"><div class="rpt-seg-val" style="color:var(--gold-light)">${vip.length}</div><div class="rpt-seg-lbl">⭐ VIP</div></div>
+        <div class="rpt-seg-box" style="background:rgba(66,153,225,.08);border:1px solid rgba(66,153,225,.22)"><div class="rpt-seg-val" style="color:#63b3ed">${regular.length}</div><div class="rpt-seg-lbl">🔵 Regular</div></div>
+        <div class="rpt-seg-box" style="background:var(--glass-bg);border:1px solid var(--glass-border)"><div class="rpt-seg-val" style="color:var(--silver)">${occasional.length}</div><div class="rpt-seg-lbl">⬜ Occasional</div></div>
+      </div>
+    </div>
+    <div class="rpt-card"><div class="rpt-card-title">🏆 Top Customers by Revenue</div>
+      <div style="overflow-x:auto"><table class="an-table"><thead><tr><th>#</th><th>Customer</th><th>Orders</th><th>Revenue</th><th>Share</th><th>Due</th></tr></thead><tbody>${crows}</tbody></table></div></div>
+    ${m.riskyCustomers.length>0?`<div class="rpt-card"><div class="rpt-card-title">🚨 Due Recovery Priority List</div>
+      <div style="overflow-x:auto"><table class="an-table"><thead><tr><th>Customer</th><th>Phone</th><th>Orders</th><th>Total Billed</th><th>Due Amount</th></tr></thead><tbody>${duePriority}</tbody></table></div></div>`:''}
+    <div class="rpt-card"><div class="rpt-card-title">💡 Customer Insights</div><div class="rpt-insight-list">${ins.join('')}</div></div>`;
+}
+
+function renderRptDue(m) {
+  const cc = m.collectionRate>=80?'#48bb78':m.collectionRate>=60?'#f6ad55':'#fc8181';
+  const last6 = m.monthlyData.slice(6);
+  const collRows = last6.map(d => {
+    const rate = d.revenue>0 ? Math.min(100, d.paid/d.revenue*100) : 0;
+    const dc = rate>=80?'#48bb78':rate>=60?'#f6ad55':'#fc8181';
+    return `<tr><td>${d.label}</td><td>${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td><td>${d.paid>0?'৳'+Math.round(d.paid).toLocaleString('en-IN'):'—'}</td><td>${d.revenue>0?'৳'+Math.round(Math.max(0,d.revenue-d.paid)).toLocaleString('en-IN'):'—'}</td><td style="color:${dc};font-weight:600">${d.revenue>0?rate.toFixed(0)+'%':'—'}</td></tr>`;
+  }).join('');
+
+  const ins = [];
+  if(m.collectionRate>=85) ins.push(_ins('pos','✅',`Collection efficiency চমৎকার — <strong>${m.collectionRate.toFixed(0)}%</strong> revenue collect হয়েছে।`));
+  else if(m.collectionRate<60) { ins.push(_ins('neg','🚨',`Collection rate মাত্র <strong>${m.collectionRate.toFixed(0)}%</strong> — ব্যবসার জন্য ঝুঁকিপূর্ণ।`)); ins.push(_ins('warn','💡','Credit limit এবং weekly follow-up system চালু করুন।')); }
+  else ins.push(_ins('warn','⚠️',`Collection rate <strong>${m.collectionRate.toFixed(0)}%</strong> — উন্নতির সুযোগ আছে।`));
+  if(m.riskyCustomers.length>0) ins.push(_ins('neg','👤',`সবচেয়ে বেশি due: <strong>${m.riskyCustomers[0][0]}</strong> — ৳${Math.round(m.riskyCustomers[0][1].due).toLocaleString('en-IN')}।`));
+  if(m.totalDue>0) { ins.push(_ins('info','📋','Recovery suggestion: প্রতি সপ্তাহে due customer-দের WhatsApp reminder পাঠান।')); ins.push(_ins('info','💡','পুরনো due collect করলে ছোট discount অফার করুন — quick recovery-তে কার্যকর।')); }
+
+  document.getElementById('rptDue').innerHTML = `
+    <div class="rpt-kpi-grid">
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">💰</div><div class="rpt-kpi-val">${m.totalRevenue>0?'৳'+Math.round(m.totalRevenue).toLocaleString('en-IN'):'—'}</div><div class="rpt-kpi-label">Total Billed</div></div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">✅</div><div class="rpt-kpi-val" style="color:#48bb78">${m.totalPaid>0?'৳'+Math.round(m.totalPaid).toLocaleString('en-IN'):'—'}</div><div class="rpt-kpi-label">Collected</div></div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">⚠️</div><div class="rpt-kpi-val" style="color:${m.totalDue>0?'#fc8181':'#48bb78'}">${m.totalDue>0?'৳'+Math.round(m.totalDue).toLocaleString('en-IN'):'৳ 0'}</div><div class="rpt-kpi-label">Outstanding</div></div>
+      <div class="rpt-kpi"><div class="rpt-kpi-icon">📊</div><div class="rpt-kpi-val" style="color:${cc}">${m.collectionRate.toFixed(1)}%</div><div class="rpt-kpi-label">Collection Rate</div></div>
+    </div>
+    <div class="rpt-card"><div class="rpt-card-title">📅 Monthly Collection Report (Last 6 Months)</div>
+      <div style="overflow-x:auto"><table class="an-table"><thead><tr><th>Month</th><th>Billed</th><th>Paid</th><th>Due</th><th>Efficiency</th></tr></thead><tbody>${collRows}</tbody></table></div></div>
+    <div class="rpt-card"><div class="rpt-card-title">💡 Collection Insights & Recovery Plan</div><div class="rpt-insight-list">${ins.join('')}</div></div>`;
+}
+
+function renderRptBrands(m) {
+  const colors = ['#C8A040','#4299e1','#48bb78','#ed8936','#9f7aea','#f687b3','#38b2ac','#fc8181','#68d391'];
+  const totalRev = m.totalBrandRev || 1;
+  const bars = m.brandEntries.map(([name,d],i) => {
+    const pct = (d.revenue/totalRev*100).toFixed(0);
+    return `<div class="rpt-bar-row"><div class="rpt-bar-lbl" style="color:${colors[i%colors.length]}">${name}</div><div class="rpt-bar-track"><div class="rpt-bar-fill" style="width:${pct}%;background:${colors[i%colors.length]}"></div></div><div class="rpt-bar-val">${pct}%</div></div>`;
+  }).join('');
+  const trows = m.brandEntries.map(([name,d],i) => `<tr>
+    <td><span class="an-rank" style="color:${colors[i%colors.length]}">${i+1}</span></td>
+    <td style="font-weight:600;color:${colors[i%colors.length]}">${name}</td>
+    <td>${d.sqft.toFixed(0)} sqft</td><td>${d.orders}</td>
+    <td style="color:var(--gold-light);font-weight:600">${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td>
+    <td>${(d.revenue/totalRev*100).toFixed(1)}%</td></tr>`).join('');
+  const ins = [];
+  if(m.brandEntries.length>0) { const [tb,td]=m.brandEntries[0]; ins.push(_ins('pos','🏆',`<strong>${tb}</strong> সবচেয়ে বেশি revenue দিচ্ছে — মোটের <strong>${(td.revenue/totalRev*100).toFixed(0)}%</strong>।`)); }
+  if(m.topBrandShare>60) ins.push(_ins('warn','⚠️',`<strong>${m.brandEntries[0][0]}</strong>-এর উপর অতিরিক্ত নির্ভরতা (${m.topBrandShare.toFixed(0)}%)। Brand diversification করুন।`));
+  if(m.brandEntries.length>=3) { const last=m.brandEntries[m.brandEntries.length-1]; ins.push(_ins('info','📊',`<strong>${last[0]}</strong> সবচেয়ে কম বিক্রিত brand। Promotion দিয়ে sales বাড়ানো যায়।`)); }
+  if(m.brandEntries.length>=4) ins.push(_ins('pos','🌐',`${m.brandEntries.length}টি brand থেকে sale আসছে — supply chain diversified।`));
+
+  document.getElementById('rptBrands').innerHTML = `
+    <div class="rpt-card"><div class="rpt-card-title">📊 Brand Revenue Share</div>${bars}</div>
+    <div class="rpt-card"><div class="rpt-card-title">🏭 Brand Performance Table</div>
+      <div style="overflow-x:auto"><table class="an-table"><thead><tr><th>#</th><th>Brand</th><th>Sqft</th><th>Orders</th><th>Revenue</th><th>Share</th></tr></thead><tbody>${trows}</tbody></table></div></div>
+    <div class="rpt-card"><div class="rpt-card-title">💡 Brand Insights</div><div class="rpt-insight-list">${ins.join('')}</div></div>`;
+}
+
+function renderRptAdvisor(m) {
+  const score = m.score;
+  const sClass = score>=70?'good':score>=45?'ok':'poor';
+  const sLabel = score>=70?'Healthy 💚':score>=45?'Moderate 🟡':'At Risk 🔴';
+  const sColor = score>=70?'#48bb78':score>=45?'#f6ad55':'#fc8181';
+
+  const strengths=[], weaknesses=[], opportunities=[], threats=[];
+  if(m.momGrowth>5) strengths.push('📈 Revenue growth momentum ('+m.momGrowth.toFixed(1)+'% MoM)');
+  if(m.collectionRate>=80) strengths.push('✅ Strong collection efficiency ('+m.collectionRate.toFixed(0)+'%)');
+  if(m.uniqueCustomers>=10) strengths.push('👥 Healthy customer base ('+m.uniqueCustomers+' customers)');
+  if(m.brandEntries.length>=4) strengths.push('🏭 Diversified brand portfolio ('+m.brandEntries.length+' brands)');
+  if(m.prodEntries.length>=5) strengths.push('🧱 Wide product range ('+m.prodEntries.filter(([,d])=>!d.isOther).length+' tile products)');
+  if(m.totalOrders>=20) strengths.push('📦 High order volume ('+m.totalOrders+' orders)');
+  if(strengths.length===0) strengths.push('📊 Business is operational with existing customer base');
+
+  if(m.momGrowth<-5) weaknesses.push('📉 Revenue declining ('+Math.abs(m.momGrowth).toFixed(1)+'% drop MoM)');
+  if(m.collectionRate<70) weaknesses.push('⚠️ Low collection rate ('+m.collectionRate.toFixed(0)+'%) — high outstanding dues');
+  if(m.topCustShare>35) weaknesses.push('👤 Over-reliance on single customer ('+m.topCustShare.toFixed(0)+'% of revenue)');
+  if(m.topBrandShare>60) weaknesses.push('🏭 Brand concentration risk ('+m.topBrandShare.toFixed(0)+'% from one brand)');
+  if(m.riskyCustomers.length>3) weaknesses.push('💰 Multiple customers with outstanding dues ('+m.riskyCustomers.length+')');
+  if(m.uniqueCustomers<5&&m.totalOrders>0) weaknesses.push('👥 Limited customer base — high vulnerability');
+  if(weaknesses.length===0) weaknesses.push('✅ No major weaknesses identified in current period');
+
+  if(m.prodEntries.length>0) opportunities.push('🚀 Promote "'+m.prodEntries[0][0]+'" — highest revenue generator');
+  opportunities.push('📣 Customer referral program — leverage existing relationships');
+  if(m.totalDue>0) opportunities.push('💰 Due recovery — ৳'+Math.round(m.totalDue).toLocaleString('en-IN')+' outstanding to collect');
+  if(m.topCustShare>30) opportunities.push('🌱 New customer acquisition — reduce concentration risk');
+  opportunities.push('📱 WhatsApp invoice delivery — faster payment collection');
+  opportunities.push('🏷️ Seasonal promotions — capitalize on peak demand periods');
+
+  if(m.topBrandShare>55) threats.push('⚡ Supply chain risk — heavy brand dependence');
+  if(m.totalDue>m.totalRevenue*0.3) threats.push('💸 Bad debt risk — dues exceed 30% of revenue');
+  if(m.uniqueCustomers<5) threats.push('🎯 Customer concentration — few customers control revenue');
+  if(m.momGrowth<-10) threats.push('📉 Declining trend — market or competition issue');
+  threats.push('🏗️ Construction market seasonality — demand fluctuations');
+  threats.push('💱 Raw material price volatility — affects pricing margin');
+  if(threats.length>4) threats.length=4;
+
+  const recs = [];
+  if(m.totalDue>0) recs.push({t:'rc-warn', tag:'⚠️ Urgent Action', txt:`Outstanding due ৳${Math.round(m.totalDue).toLocaleString('en-IN')}। Most risky: ${m.riskyCustomers.slice(0,2).map(([n])=>n).join(', ')}। এই সপ্তাহেই follow-up করুন।`});
+  if(m.momGrowth<0) recs.push({t:'rc-warn', tag:'📉 Sales Alert', txt:`Revenue গত মাসের চেয়ে ${Math.abs(m.momGrowth).toFixed(1)}% কমেছে। Existing customer-দের সাথে যোগাযোগ বাড়ান।`});
+  if(m.prodEntries.length>0) recs.push({t:'rc-growth', tag:'🚀 Growth Opportunity', txt:`Top product "${m.prodEntries[0][0]}" আরো promote করুন। Bundle deal বা loyalty discount দিতে পারেন।`});
+  if(m.topCustShare>35) recs.push({t:'rc-action', tag:'🎯 Strategy', txt:`Revenue-এ top customer-এর share ${m.topCustShare.toFixed(0)}%। New customer acquisition বাড়ান।`});
+  if(m.topBrandShare>50&&m.brandEntries.length>0) recs.push({t:'rc-action', tag:'🏭 Brand Strategy', txt:`${m.brandEntries[0][0]}-এর উপর নির্ভরতা কমান। Alternative brand relationship তৈরি করুন।`});
+  recs.push({t:'rc-info', tag:'💡 Management Tip', txt:'Monthly revenue target নির্ধারণ করুন এবং প্রতি সপ্তাহে Analytics check করুন।'});
+
+  const nextMoForecast = m.lastMonthRev>0 ? Math.round(m.lastMonthRev*(1+Math.max(-0.1,Math.min(0.2,m.momGrowth/100)))) : 0;
+  const collTarget = Math.round(m.totalDue*0.7);
+
+  document.getElementById('rptAdvisor').innerHTML = `
+    <div class="rpt-health-score">
+      <div class="rhs-circle ${sClass}"><div class="rhs-num">${score}</div><div class="rhs-lbl">/ 100</div></div>
+      <div class="rhs-meta">
+        <div class="rhs-title">Business Health Score: <span style="color:${sColor}">${sLabel}</span></div>
+        <div class="rhs-sub">Score টি revenue growth, collection rate, customer ও brand diversification বিশ্লেষণ করে তৈরি। ৭০+ = Healthy, ৪৫-৭০ = Moderate, ৪৫- = At Risk।</div>
+      </div>
+    </div>
+    <div class="rpt-card"><div class="rpt-card-title">🔍 SWOT Analysis</div>
+      <div class="swot-grid">
+        <div class="swot-box sw-s"><div class="swot-ttl">💪 Strengths</div>${strengths.map(s=>`<div class="swot-li"><span>✓</span><span>${s}</span></div>`).join('')}</div>
+        <div class="swot-box sw-w"><div class="swot-ttl">⚠️ Weaknesses</div>${weaknesses.map(w=>`<div class="swot-li"><span>✗</span><span>${w}</span></div>`).join('')}</div>
+        <div class="swot-box sw-o"><div class="swot-ttl">🌱 Opportunities</div>${opportunities.slice(0,4).map(o=>`<div class="swot-li"><span>→</span><span>${o}</span></div>`).join('')}</div>
+        <div class="swot-box sw-t"><div class="swot-ttl">⚡ Threats</div>${threats.map(t=>`<div class="swot-li"><span>!</span><span>${t}</span></div>`).join('')}</div>
+      </div>
+    </div>
+    <div class="rpt-card"><div class="rpt-card-title">📋 Management Recommendations</div>
+      <div class="rpt-rec-list">${recs.map(r=>`<div class="rpt-rec ${r.t}"><div class="rpt-rec-tag">${r.tag}</div><div class="rpt-rec-txt">${r.txt}</div></div>`).join('')}</div>
+    </div>
+    ${(nextMoForecast>0||m.totalDue>0)?`<div class="rpt-card"><div class="rpt-card-title">🔮 Future Forecast & Targets</div>
+      ${nextMoForecast>0?`<div class="rpt-g-row"><div class="rpt-g-key">📅 Next Month Revenue Target</div><div class="rpt-g-val" style="color:var(--gold-light)">৳${nextMoForecast.toLocaleString('en-IN')}</div></div>`:''}
+      ${m.thisYearRev>0?`<div class="rpt-g-row"><div class="rpt-g-key">📆 Quarterly Forecast</div><div class="rpt-g-val" style="color:var(--gold-light)">৳${Math.round(m.thisYearRev/Math.max(1,new Date().getMonth()+1)*3).toLocaleString('en-IN')}</div></div>`:''}
+      ${collTarget>0?`<div class="rpt-g-row"><div class="rpt-g-key">🎯 Due Collection Target (This Month)</div><div class="rpt-g-val" style="color:#48bb78">৳${collTarget.toLocaleString('en-IN')}</div></div>`:''}
+      <div class="rpt-g-row"><div class="rpt-g-key">👥 New Customer Target (Monthly)</div><div class="rpt-g-val">${Math.max(3,Math.ceil(m.uniqueCustomers*0.2))} নতুন customer</div></div>
+      ${m.prodEntries.length>0?`<div class="rpt-g-row"><div class="rpt-g-key">📦 Focus Product</div><div class="rpt-g-val" style="color:var(--gold-light)">${m.prodEntries[0][0]}</div></div>`:''}
+    </div>`:''}`;
+}
+
+// ── PDF Business Report Export ──
+function printBizReportPDF() {
+  const all = loadHistory();
+  const arr = filterByRptPeriod(all);
+  const m = computeBizMetrics(arr, all);
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+  const periodLabel = _rptPeriod==='all'?'All Time':_rptPeriod==='year'?'This Year ('+now.getFullYear()+')':_rptPeriod==='month'?now.toLocaleString('default',{month:'long',year:'numeric'}):'Last 7 Days';
+  const G = '#C8A040';
+
+  const ph = (title,pg) => `<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;padding-bottom:10px;border-bottom:2.5px solid ${G}">
+    <div><div style="font-size:8pt;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Masuma Tiles Agency — Business Intelligence Report</div>
+    <div style="font-size:17pt;font-weight:900;color:#1a2040">${title}</div></div>
+    <div style="text-align:right;font-size:7.5pt;color:#aaa"><div>Period: ${periodLabel}</div><div>Date: ${dateStr}</div><div>Page ${pg}</div></div></div>`;
+
+  const barHtml = (label,val,max,color) => {
+    const p = max>0?Math.min(100,val/max*100):0;
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+      <div style="width:120px;font-size:8.5pt;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${label}</div>
+      <div style="flex:1;background:#eee;border-radius:3px;height:9px"><div style="background:${color||G};height:9px;border-radius:3px;width:${p.toFixed(0)}%"></div></div>
+      <div style="width:60px;text-align:right;font-size:8pt;font-weight:700;color:${color||G}">${val}</div></div>`;
+  };
+
+  const scoreColor = m.score>=70?'#27AE60':m.score>=45?'#D97706':'#E53E3E';
+  const colors = [G,'#2B6CB0','#27AE60','#D97706','#7B2D8B','#E53E3E','#2C7A7B','#975A16'];
+
+  const win = window.open('','_blank','width=900,height=700');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Business Report — Masuma Tiles</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#fff;color:#222;}
+  .page{width:210mm;min-height:297mm;padding:15mm 14mm;page-break-after:always;position:relative;overflow:hidden;}
+  .page:last-child{page-break-after:avoid;}
+  @media print{.page{page-break-after:always;}.page:last-child{page-break-after:avoid;}body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+  @page{size:A4;margin:0;}
+  .kbox{background:#f8f7f3;border:1px solid #e8dfc8;border-radius:7px;padding:12px 10px;text-align:center;border-top:3px solid ${G};}
+  .kval{font-size:15pt;font-weight:900;color:${G};}
+  .klbl{font-size:6.5pt;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+  .dtable{width:100%;border-collapse:collapse;font-size:8.5pt;margin-top:8px;}
+  .dtable th{background:#f5ead5;color:#7a5010;font-weight:700;padding:7px 8px;text-align:left;font-size:7.5pt;text-transform:uppercase;}
+  .dtable td{padding:6px 8px;border-bottom:1px solid #f0f0f0;color:#333;}
+  .dtable tr:nth-child(even) td{background:#fafaf8;}
+  .ibox{padding:9px 11px;border-radius:5px;font-size:8.5pt;margin-bottom:6px;line-height:1.5;}
+  .ip{background:#f0fff4;border-left:3px solid #27AE60;color:#1a5c30;}
+  .in{background:#fff5f5;border-left:3px solid #E53E3E;color:#742a2a;}
+  .iw{background:#fffaf0;border-left:3px solid #D97706;color:#744210;}
+  .ii{background:#ebf8ff;border-left:3px solid #2B6CB0;color:#1a365d;}
+  .swgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+  .swbox{border-radius:6px;padding:12px;}
+  .sw-s{background:#f0fff4;border:1px solid #9AE6B4;}.sw-w{background:#fff5f5;border:1px solid #FEB2B2;}
+  .sw-o{background:#ebf8ff;border:1px solid #BEE3F8;}.sw-t{background:#fffaf0;border:1px solid #FEEBC8;}
+  .swtl{font-size:9pt;font-weight:800;margin-bottom:7px;}
+  .sw-s .swtl{color:#22543D;}.sw-w .swtl{color:#742A2A;}.sw-o .swtl{color:#1A365D;}.sw-t .swtl{color:#744210;}
+  .swli{font-size:7.5pt;color:#444;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.4;display:flex;gap:5px;}
+  .swli:last-child{border:none;}
+  .recbox{padding:10px 12px;border-radius:5px;margin-bottom:7px;font-size:8.5pt;}
+  .rc-a{background:#fffaf0;border-left:3px solid ${G};}.rc-w{background:#fff5f5;border-left:3px solid #E53E3E;}
+  .rc-g{background:#f0fff4;border-left:3px solid #27AE60;}.rc-i{background:#ebf8ff;border-left:3px solid #2B6CB0;}
+  .rtag{font-size:6.5pt;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+  .rc-a .rtag{color:${G};}.rc-w .rtag{color:#E53E3E;}.rc-g .rtag{color:#27AE60;}.rc-i .rtag{color:#2B6CB0;}
+  .grow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+  .secttl{font-size:10.5pt;font-weight:800;color:#1a2040;margin:14px 0 8px;padding-bottom:5px;border-bottom:1.5px solid #e8dfc8;}
+  .frow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:8.5pt;}
+  .frow:last-child{border:none;}.fkey{color:#666;}.fval{font-weight:700;color:#222;}
+  </style></head><body>`);
+
+  // PAGE 1: COVER
+  win.document.write(`<div class="page" style="background:linear-gradient(160deg,#0a0f1c 0%,#1c2848 100%);display:flex;flex-direction:column;justify-content:space-between;color:#fff">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:36px">
+        <div style="width:48px;height:48px;background:${G};border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px">🏪</div>
+        <div><div style="font-size:11pt;color:#EEC85A;font-weight:800;text-transform:uppercase;letter-spacing:1.5px">Masuma Tiles Agency</div>
+          <div style="font-size:7.5pt;color:rgba(200,210,230,.55)">College Road, Amishapara, Sonaimuri, Noakhali | 01839-843685</div></div>
+      </div>
+      <div style="margin-bottom:30px">
+        <div style="font-size:8pt;color:#EEC85A;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px">Business Intelligence Report</div>
+        <div style="font-size:30pt;font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px">Executive<br>Summary</div>
+        <div style="font-size:9.5pt;color:rgba(200,210,230,.7)">Period: <strong style="color:#EEC85A">${periodLabel}</strong> &nbsp;|&nbsp; Generated: ${dateStr}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px">
+        ${[{i:'💰',v:'৳'+Math.round(m.totalRevenue).toLocaleString('en-IN'),l:'Total Revenue'},{i:'📦',v:m.totalOrders,l:'Orders'},{i:'👥',v:m.uniqueCustomers,l:'Customers'},{i:'📐',v:m.totalSqft.toFixed(0)+' sqft',l:'Sqft Sold'},{i:'✅',v:m.collectionRate.toFixed(0)+'%',l:'Collection Rate'},{i:'🏥',v:m.score+'/100',l:'Health Score'}].map(k=>`
+          <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:16px;margin-bottom:3px">${k.i}</div>
+            <div style="font-size:12pt;font-weight:900;color:#EEC85A">${k.v}</div>
+            <div style="font-size:6.5pt;color:rgba(200,210,230,.55);text-transform:uppercase;letter-spacing:.5px;margin-top:2px">${k.l}</div>
+          </div>`).join('')}
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(200,160,64,.3);border-radius:8px;padding:14px">
+        <div style="font-size:8pt;font-weight:700;color:#EEC85A;margin-bottom:7px;text-transform:uppercase;letter-spacing:1px">📋 Key Highlights</div>
+        ${[
+          m.momGrowth>0?`Revenue grew ${m.momGrowth.toFixed(1)}% compared to last month`:`Revenue ${m.momGrowth<0?'declined '+Math.abs(m.momGrowth).toFixed(1)+'% vs last month — attention needed':'stable'}`,
+          `Collection efficiency: ${m.collectionRate.toFixed(0)}% | Outstanding: ৳${Math.round(m.totalDue).toLocaleString('en-IN')}`,
+          m.prodEntries.length>0?`Top product: "${m.prodEntries[0][0]}" — ${(m.prodEntries[0][1].revenue/(m.totalProdRev||1)*100).toFixed(0)}% of product revenue`:'No product data yet',
+          m.brandEntries.length>0?`Leading brand: "${m.brandEntries[0][0]}" (${(m.brandEntries[0][1].revenue/(m.totalBrandRev||1)*100).toFixed(0)}% of brand revenue)`:'No brand data yet',
+          m.riskyCustomers.length>0?`${m.riskyCustomers.length} customers with outstanding dues need follow-up`:'All customers clear on payment',
+          `Business Health Score: ${m.score}/100 — ${m.score>=70?'Healthy':m.score>=45?'Moderate':'At Risk'}`
+        ].map(t=>`<div style="font-size:8.5pt;color:rgba(220,225,240,.82);padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06);line-height:1.4">▸ ${t}</div>`).join('')}
+      </div>
+    </div>
+    <div style="font-size:7pt;color:rgba(200,210,230,.3);border-top:1px solid rgba(255,255,255,.08);padding-top:10px;display:flex;justify-content:space-between">
+      <span>Confidential — Masuma Tiles Agency Internal Report</span><span>Page 1 of 8</span>
+    </div>
+  </div>`);
+
+  // PAGE 2: REVENUE ANALYSIS
+  const last6 = m.monthlyData.slice(6);
+  win.document.write(`<div class="page">${ph('Revenue Analysis','2 of 8')}
+    <div class="grow">
+      ${[{i:'💰',v:'৳'+Math.round(m.totalRevenue).toLocaleString('en-IN'),l:'Total Revenue'},{i:'📅',v:'৳'+Math.round(m.thisMonthRev).toLocaleString('en-IN'),l:'This Month'},{i:'📆',v:'৳'+Math.round(m.lastMonthRev).toLocaleString('en-IN'),l:'Last Month'},
+         {i:'🗓️',v:'৳'+Math.round(m.thisYearRev).toLocaleString('en-IN'),l:'This Year'},{i:'📊',v:'৳'+Math.round(m.avgOrder).toLocaleString('en-IN'),l:'Avg Order'},{i:'📈',v:(m.momGrowth>=0?'▲ ':'▼ ')+Math.abs(m.momGrowth).toFixed(1)+'%',l:'MoM Growth'}]
+         .map(k=>`<div class="kbox"><div class="kval">${k.v}</div><div class="klbl">${k.i} ${k.l}</div></div>`).join('')}
+    </div>
+    <div class="secttl">📊 Monthly Revenue Trend (Last 6 Months)</div>
+    <table class="dtable"><thead><tr><th>Month</th><th>Revenue</th><th>Orders</th><th>Growth</th></tr></thead><tbody>
+    ${last6.map((d,i) => { const prev=i>0?last6[i-1].revenue:0; const g=prev>0?(d.revenue-prev)/prev*100:0; return `<tr><td>${d.label}</td><td style="font-weight:700;color:${G}">${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td><td>${d.orders}</td><td style="color:${g>=0?'#27AE60':'#E53E3E'};font-weight:600">${d.revenue>0&&prev>0?(g>=0?'▲':'▼')+Math.abs(g).toFixed(1)+'%':'—'}</td></tr>`; }).join('')}
+    </tbody></table>
+    <div class="secttl">💡 Revenue Insights</div>
+    ${m.momGrowth>5?`<div class="ibox ip">📈 Revenue grew ${m.momGrowth.toFixed(1)}% this month — positive growth momentum.</div>`:''}
+    ${m.momGrowth<-5?`<div class="ibox in">📉 Revenue declined ${Math.abs(m.momGrowth).toFixed(1)}% vs last month — requires immediate attention.</div>`:''}
+    ${m.maxMonth.revenue>0?`<div class="ibox ii">📅 Best month: ${m.maxMonth.label} — ৳${Math.round(m.maxMonth.revenue).toLocaleString('en-IN')}. Analyze what drove this peak.</div>`:''}
+    <div class="ibox ii">📊 Average order value: ৳${Math.round(m.avgOrder).toLocaleString('en-IN')}. Consider upselling to increase this figure.</div>
+  </div>`);
+
+  // PAGE 3: PRODUCT ANALYSIS
+  const top6prod = m.prodEntries.slice(0,6);
+  win.document.write(`<div class="page">${ph('Product Performance Analysis','3 of 8')}
+    <div class="secttl">🏆 Top Products by Revenue</div>
+    ${top6prod.map(([n,d],i)=>barHtml(n,d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—',m.totalProdRev||1,colors[i%colors.length])).join('')}
+    <table class="dtable" style="margin-top:10px"><thead><tr><th>#</th><th>Product</th><th>Sqft Sold</th><th>Orders</th><th>Revenue</th><th>Share %</th></tr></thead><tbody>
+    ${top6prod.map(([n,d],i)=>`<tr><td>${i+1}</td><td>${n}</td><td>${d.sqft>0?d.sqft.toFixed(0):'-'}</td><td>${d.orders}</td><td style="font-weight:700;color:${G}">${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td><td>${(d.revenue/(m.totalProdRev||1)*100).toFixed(1)}%</td></tr>`).join('')}
+    </tbody></table>
+    <div class="secttl">💡 Product Insights</div>
+    ${top6prod.length>0?`<div class="ibox ip">🏆 "${top6prod[0][0]}" is the best performer — ${(top6prod[0][1].revenue/(m.totalProdRev||1)*100).toFixed(0)}% of product revenue. Prioritize stock availability.</div>`:''}
+    ${m.prodEntries.length>=3?`<div class="ibox ii">📊 Top 3 products contribute ${m.prodEntries.slice(0,3).reduce((s,[,d])=>s+d.revenue,0)/(m.totalProdRev||1)*100|0}% of product revenue.</div>`:''}
+    ${m.prodEntries.length>5?`<div class="ibox iw">⚠️ "${m.prodEntries[m.prodEntries.length-1][0]}" has lowest sales. Consider promotional pricing.</div>`:''}
+  </div>`);
+
+  // PAGE 4: CUSTOMER ANALYSIS
+  const top6cust = m.custEntries.slice(0,6);
+  const vipCount = m.custEntries.filter(([,d])=>d.revenue>=m.totalRevenue*0.15).length;
+  win.document.write(`<div class="page">${ph('Customer Intelligence Report','4 of 8')}
+    <div class="grow">
+      ${[{i:'👥',v:m.uniqueCustomers,l:'Total Customers'},{i:'⭐',v:vipCount,l:'VIP Customers'},{i:'🚨',v:m.riskyCustomers.length,l:'With Due'}]
+      .map(k=>`<div class="kbox"><div class="kval">${k.v}</div><div class="klbl">${k.i} ${k.l}</div></div>`).join('')}
+    </div>
+    <div class="secttl">🏆 Top Customers by Revenue</div>
+    <table class="dtable"><thead><tr><th>#</th><th>Customer</th><th>Phone</th><th>Orders</th><th>Revenue</th><th>Due</th></tr></thead><tbody>
+    ${top6cust.map(([n,d],i)=>`<tr><td>${i+1}</td><td style="font-weight:600">${n}</td><td style="font-size:7.5pt">${d.phone||'—'}</td><td>${d.orders}</td><td style="font-weight:700;color:${G}">৳${Math.round(d.revenue).toLocaleString('en-IN')}</td><td style="color:${d.due>0?'#E53E3E':'#27AE60'};font-weight:600">${d.due>0?'৳'+Math.round(d.due).toLocaleString('en-IN'):'Clear'}</td></tr>`).join('')}
+    </tbody></table>
+    ${m.riskyCustomers.length>0?`<div class="secttl">🚨 Due Recovery Priority</div>
+    <table class="dtable"><thead><tr><th>Customer</th><th>Phone</th><th>Total Billed</th><th>Due Amount</th></tr></thead><tbody>
+    ${m.riskyCustomers.slice(0,5).map(([n,d])=>`<tr><td style="font-weight:600">${n}</td><td>${d.phone||'—'}</td><td>৳${Math.round(d.revenue).toLocaleString('en-IN')}</td><td style="color:#E53E3E;font-weight:700">৳${Math.round(d.due).toLocaleString('en-IN')}</td></tr>`).join('')}
+    </tbody></table>`:''}
+    ${m.topCustShare>35?`<div class="ibox iw">⚠️ Top customer contributes ${m.topCustShare.toFixed(0)}% of revenue — over-dependence risk. Diversify customer base.</div>`:''}
+    ${vipCount>0?`<div class="ibox ip">⭐ ${vipCount} VIP customer(s) drive significant revenue. Maintain strong relationships with special attention.</div>`:''}
+  </div>`);
+
+  // PAGE 5: BRAND ANALYSIS
+  const top6brand = m.brandEntries.slice(0,6);
+  win.document.write(`<div class="page">${ph('Brand Performance Report','5 of 8')}
+    <div class="secttl">📊 Brand Revenue Share</div>
+    ${top6brand.map(([n,d],i)=>barHtml(n,d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—',m.totalBrandRev||1,colors[i%colors.length])).join('')}
+    <table class="dtable" style="margin-top:10px"><thead><tr><th>#</th><th>Brand</th><th>Sqft</th><th>Orders</th><th>Revenue</th><th>Share</th></tr></thead><tbody>
+    ${top6brand.map(([n,d],i)=>`<tr><td>${i+1}</td><td style="font-weight:700;color:${colors[i%colors.length]}">${n}</td><td>${d.sqft.toFixed(0)}</td><td>${d.orders}</td><td style="font-weight:700;color:${G}">${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td><td>${(d.revenue/(m.totalBrandRev||1)*100).toFixed(1)}%</td></tr>`).join('')}
+    </tbody></table>
+    <div class="secttl">💡 Brand Insights</div>
+    ${m.brandEntries.length>0?`<div class="ibox ip">🏆 "${m.brandEntries[0][0]}" leads with ${(m.brandEntries[0][1].revenue/(m.totalBrandRev||1)*100).toFixed(0)}% of brand revenue.</div>`:''}
+    ${m.topBrandShare>60?`<div class="ibox iw">⚠️ ${m.topBrandShare.toFixed(0)}% revenue from single brand — supply chain concentration risk. Develop alternative brand relationships.</div>`:''}
+    ${m.brandEntries.length>=4?`<div class="ibox ip">🌐 ${m.brandEntries.length} active brands — good supply diversification.</div>`:''}
+  </div>`);
+
+  // PAGE 6: DUE & COLLECTION
+  win.document.write(`<div class="page">${ph('Due & Collection Report','6 of 8')}
+    <div class="grow">
+      ${[{i:'💰',v:'৳'+Math.round(m.totalRevenue).toLocaleString('en-IN'),l:'Total Billed'},{i:'✅',v:'৳'+Math.round(m.totalPaid).toLocaleString('en-IN'),l:'Collected'},{i:'⚠️',v:'৳'+Math.round(m.totalDue).toLocaleString('en-IN'),l:'Outstanding'}]
+      .map(k=>`<div class="kbox"><div class="kval">${k.v}</div><div class="klbl">${k.i} ${k.l}</div></div>`).join('')}
+    </div>
+    <div style="text-align:center;margin:14px 0;padding:14px;background:#f8f7f3;border-radius:8px;border:2px solid ${m.collectionRate>=80?'#27AE60':m.collectionRate>=60?'#D97706':'#E53E3E'}">
+      <div style="font-size:22pt;font-weight:900;color:${m.collectionRate>=80?'#27AE60':m.collectionRate>=60?'#D97706':'#E53E3E'}">${m.collectionRate.toFixed(1)}%</div>
+      <div style="font-size:8pt;color:#666;text-transform:uppercase;letter-spacing:.5px">Overall Collection Efficiency</div>
+    </div>
+    <div class="secttl">📅 Monthly Collection (Last 6 Months)</div>
+    <table class="dtable"><thead><tr><th>Month</th><th>Billed</th><th>Paid</th><th>Due</th><th>Efficiency</th></tr></thead><tbody>
+    ${last6.map(d=>{ const r=d.revenue>0?Math.min(100,d.paid/d.revenue*100):0; return `<tr><td>${d.label}</td><td>${d.revenue>0?'৳'+Math.round(d.revenue).toLocaleString('en-IN'):'—'}</td><td>${d.paid>0?'৳'+Math.round(d.paid).toLocaleString('en-IN'):'—'}</td><td style="color:${d.revenue>d.paid?'#E53E3E':'#27AE60'}">${d.revenue>0?'৳'+Math.round(Math.max(0,d.revenue-d.paid)).toLocaleString('en-IN'):'—'}</td><td style="font-weight:700;color:${r>=80?'#27AE60':r>=60?'#D97706':'#E53E3E'}">${d.revenue>0?r.toFixed(0)+'%':'—'}</td></tr>`; }).join('')}
+    </tbody></table>
+    <div class="secttl">Recovery Recommendations</div>
+    ${m.collectionRate<80?`<div class="ibox iw">⚠️ Collection rate ${m.collectionRate.toFixed(0)}% — Weekly WhatsApp reminders to due customers recommended.</div>`:''}
+    ${m.riskyCustomers.length>0?`<div class="ibox in">🚨 Top due customer: "${m.riskyCustomers[0][0]}" — ৳${Math.round(m.riskyCustomers[0][1].due).toLocaleString('en-IN')}. Prioritize collection.</div>`:''}
+    <div class="ibox ii">💡 Tip: Offer small discount (2-3%) for early payment — improves cash flow significantly.</div>
+  </div>`);
+
+  // PAGE 7: SWOT + HEALTH SCORE
+  const strengths2=[], weaknesses2=[], opportunities2=[], threats2=[];
+  if(m.momGrowth>5) strengths2.push('Revenue growth momentum ('+m.momGrowth.toFixed(1)+'% MoM)');
+  if(m.collectionRate>=80) strengths2.push('Strong collection efficiency ('+m.collectionRate.toFixed(0)+'%)');
+  if(m.uniqueCustomers>=10) strengths2.push('Healthy customer base ('+m.uniqueCustomers+' customers)');
+  if(m.brandEntries.length>=4) strengths2.push('Diversified brand portfolio ('+m.brandEntries.length+' brands)');
+  if(strengths2.length===0) strengths2.push('Operational with established customer relationships');
+  if(m.momGrowth<-5) weaknesses2.push('Revenue declining ('+Math.abs(m.momGrowth).toFixed(1)+'% drop)');
+  if(m.collectionRate<70) weaknesses2.push('Low collection rate ('+m.collectionRate.toFixed(0)+'%)');
+  if(m.topCustShare>35) weaknesses2.push('Customer revenue concentration ('+m.topCustShare.toFixed(0)+'%)');
+  if(m.topBrandShare>60) weaknesses2.push('Brand concentration risk ('+m.topBrandShare.toFixed(0)+'%)');
+  if(weaknesses2.length===0) weaknesses2.push('No major weaknesses in current period');
+  opportunities2.push('Customer referral program implementation');
+  if(m.totalDue>0) opportunities2.push('Due recovery — ৳'+Math.round(m.totalDue).toLocaleString('en-IN')+' outstanding');
+  opportunities2.push('Seasonal promotional campaigns');
+  opportunities2.push('WhatsApp-based invoice & reminder system');
+  threats2.push('Construction market seasonality');
+  if(m.topBrandShare>55) threats2.push('Supply chain concentration risk');
+  threats2.push('Raw material price volatility');
+  if(m.totalDue>m.totalRevenue*0.3) threats2.push('Bad debt risk — dues >30% of revenue');
+
+  win.document.write(`<div class="page">${ph('AI Business Advisor — SWOT Analysis','7 of 8')}
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;padding:14px;background:#f8f7f3;border-radius:8px;border:2px solid ${scoreColor}">
+      <div style="width:70px;height:70px;border-radius:50%;border:3px solid ${scoreColor};display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0">
+        <div style="font-size:18pt;font-weight:900;color:${scoreColor}">${m.score}</div>
+        <div style="font-size:6pt;color:#888;text-transform:uppercase">/100</div>
+      </div>
+      <div><div style="font-size:11pt;font-weight:800;color:#1a2040">Business Health Score: <span style="color:${scoreColor}">${m.score>=70?'Healthy':m.score>=45?'Moderate':'At Risk'}</span></div>
+        <div style="font-size:8pt;color:#666;margin-top:3px">Calculated from: revenue growth, collection rate, customer & brand diversification metrics.</div></div>
+    </div>
+    <div class="swgrid">
+      <div class="swbox sw-s"><div class="swtl">💪 Strengths</div>${strengths2.map(s=>`<div class="swli"><span>✓</span><span>${s}</span></div>`).join('')}</div>
+      <div class="swbox sw-w"><div class="swtl">⚠️ Weaknesses</div>${weaknesses2.map(w=>`<div class="swli"><span>✗</span><span>${w}</span></div>`).join('')}</div>
+      <div class="swbox sw-o"><div class="swtl">🌱 Opportunities</div>${opportunities2.map(o=>`<div class="swli"><span>→</span><span>${o}</span></div>`).join('')}</div>
+      <div class="swbox sw-t"><div class="swtl">⚡ Threats</div>${threats2.map(t=>`<div class="swli"><span>!</span><span>${t}</span></div>`).join('')}</div>
+    </div>
+    <div class="secttl">📋 Management Recommendations</div>
+    ${m.totalDue>0?`<div class="recbox rc-w"><div class="rtag">⚠️ Urgent</div>Outstanding due ৳${Math.round(m.totalDue).toLocaleString('en-IN')} — follow up immediately with ${m.riskyCustomers.slice(0,2).map(([n])=>n).join(', ')||'due customers'}.</div>`:''}
+    ${m.momGrowth<0?`<div class="recbox rc-w"><div class="rtag">📉 Sales Alert</div>Revenue declined ${Math.abs(m.momGrowth).toFixed(1)}% — increase customer outreach and new lead generation.</div>`:''}
+    ${m.prodEntries.length>0?`<div class="recbox rc-g"><div class="rtag">🚀 Growth</div>Promote "${m.prodEntries[0][0]}" more aggressively — bundle deals and loyalty discounts can drive volume.</div>`:''}
+    <div class="recbox rc-i"><div class="rtag">💡 Management Tip</div>Set monthly revenue targets and review Analytics weekly. Data-driven decisions accelerate growth.</div>
+  </div>`);
+
+  // PAGE 8: FORECAST & CONCLUSION
+  const nextMo = m.lastMonthRev>0?Math.round(m.lastMonthRev*(1+Math.max(-0.1,Math.min(0.2,m.momGrowth/100)))):0;
+  const qForecast = m.thisYearRev>0?Math.round(m.thisYearRev/Math.max(1,new Date().getMonth()+1)*3):0;
+  win.document.write(`<div class="page">${ph('Future Forecast & Conclusion','8 of 8')}
+    <div class="secttl">🔮 Financial Forecast</div>
+    ${[
+      {k:'Next Month Revenue Target', v: nextMo>0?'৳'+nextMo.toLocaleString('en-IN'):'—'},
+      {k:'Quarterly Revenue Forecast', v: qForecast>0?'৳'+qForecast.toLocaleString('en-IN'):'—'},
+      {k:'Due Collection Target (This Month)', v: m.totalDue>0?'৳'+Math.round(m.totalDue*0.7).toLocaleString('en-IN'):'৳ 0'},
+      {k:'New Customer Target (Monthly)', v: Math.max(3,Math.ceil(m.uniqueCustomers*0.2))+' customers'},
+      {k:'Focus Product', v: m.prodEntries.length>0?m.prodEntries[0][0]:'—'},
+      {k:'Focus Brand', v: m.brandEntries.length>0?m.brandEntries[0][0]:'—'},
+    ].map(r=>`<div class="frow"><div class="fkey">${r.k}</div><div class="fval" style="color:${G}">${r.v}</div></div>`).join('')}
+    <div class="secttl">📊 Executive Conclusion</div>
+    <div style="font-size:9pt;line-height:1.7;color:#333;padding:14px;background:#f8f7f3;border-radius:8px;border-left:3px solid ${G}">
+      <p style="margin-bottom:8px">Masuma Tiles Agency-এর business data বিশ্লেষণ করে দেখা গেছে যে মোট revenue <strong>৳${Math.round(m.totalRevenue).toLocaleString('en-IN')}</strong> এবং collection efficiency <strong>${m.collectionRate.toFixed(0)}%</strong>।</p>
+      <p style="margin-bottom:8px">${m.momGrowth>=0?`Revenue month-over-month ${m.momGrowth.toFixed(1)}% বৃদ্ধি পেয়েছে — positive growth trajectory।`:`Revenue ${Math.abs(m.momGrowth).toFixed(1)}% কমেছে — focused recovery strategy প্রয়োজন।`}</p>
+      ${m.prodEntries.length>0?`<p style="margin-bottom:8px">Best performing product <strong>"${m.prodEntries[0][0]}"</strong> এবং leading brand <strong>"${m.brandEntries[0]?.[0]||'—'}"</strong>।</p>`:''}
+      <p style="margin-bottom:8px">Business Health Score: <strong style="color:${scoreColor}">${m.score}/100 (${m.score>=70?'Healthy':m.score>=45?'Moderate':'At Risk'})</strong>।</p>
+      <p>সর্বোচ্চ priority হলো: due collection, customer retention এবং steady revenue growth।</p>
+    </div>
+    <div style="margin-top:40px;display:flex;justify-content:space-between;padding-top:14px;border-top:1px solid #e0e0e0">
+      <div style="text-align:center"><div style="width:120px;border-top:1.5px solid #333;padding-top:6px;font-size:7.5pt;color:#666;margin-top:30px">Authorized Signature</div></div>
+      <div style="text-align:center"><div style="font-size:7.5pt;color:#888">Generated by Masuma Tiles Management System<br>Date: ${dateStr}<br>This report is confidential and for internal use only.</div></div>
+    </div>
+  </div>`);
+
+  win.document.write('</body></html>');
+  win.document.close();
+  setTimeout(()=>win.print(),900);
 }
 
 // ════════════════════════════════════════
